@@ -7,4 +7,6 @@ static const String filmName = 'Doctor Strange in the Multiverse of Madness';
   static const String simialr = 'Similar ';
 
   static const String summary = 'Summary ';
+  static const String cast = 'Cast';
+  static const String genres = 'Genres';
 }

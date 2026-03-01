@@ -14,8 +14,8 @@ class MoviesRemoteDsImpl implements MoviesRemoteDs{
     try {
       var response = await apiManager.get(EndPoint.moviesList,
         queryParameters: {
-          'sort_by': sortBy,
-          'limit': 20,
+
+
         },
       );
       MoviesResponse moviesResponse = MoviesResponse.fromJson(response.data);

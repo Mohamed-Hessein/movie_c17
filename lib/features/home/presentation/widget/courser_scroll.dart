@@ -44,7 +44,7 @@ class CourserScroll extends StatelessWidget {
           builder: (BuildContext context) {
             return GestureDetector(
               onTap: (){
-                context.pushRoute(const MovieDetailsRoute());
+                context.pushRoute( MovieDetailsRoute(movies: movie));
               },
               child: Container(
                   width: MediaQuery.of(context).size.width * 0.6,
@@ -58,12 +58,12 @@ class CourserScroll extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(20.0),
                         child: Image.network(
-                          movie.mediumCoverImage ?? "", // رابط الصورة من الـ API
+                          movie.mediumCoverImage ?? "",
                           fit: BoxFit.cover,
                           height: double.infinity,
                           width: double.infinity,
                           errorBuilder: (context, error, stackTrace) =>
-                              Image.asset(ImageApp.bgHome, fit: BoxFit.cover), // صورة احتياطية
+                              Image.asset(ImageApp.bgHome, fit: BoxFit.cover),
                         ),
                       ),
 
@@ -80,7 +80,7 @@ class CourserScroll extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "${movie.rating ?? 0.0}", // التقييم الحقيقي
+                                "${movie.rating ?? 0.0}",
                                 style: StyleApp.smText,
                               ),
                               const SizedBox(width: 4),
