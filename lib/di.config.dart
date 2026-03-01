@@ -31,6 +31,12 @@ import 'features/home/data/repo/movies_repo_impl.dart' as _i558;
 import 'features/home/domain/repo/move_repo.dart' as _i1064;
 import 'features/home/domain/usecase/movies_use_case.dart' as _i1064;
 import 'features/home/presentation/bloc/home_bloc.dart' as _i123;
+import 'features/search/data/data_source/search_ds_impl.dart' as _i234;
+import 'features/search/data/data_source/serach_ds.dart' as _i561;
+import 'features/search/data/repo/search_repo_impl.dart' as _i541;
+import 'features/search/domain/repo/search_repo.dart' as _i623;
+import 'features/search/domain/usecase/search_usecase.dart' as _i1044;
+import 'features/search/presention/bloc/search_bloc.dart' as _i206;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -45,6 +51,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i6.DetailsDs>(
       () => _i700.DetailsDsImpl(gh<_i237.ApiManager>()),
+    );
+    gh.factory<_i561.SearchDs>(
+      () => _i234.SearchDsImpl(gh<_i237.ApiManager>()),
     );
     gh.factory<_i1033.SuggetsionRepo>(
       () => _i296.SuggestionRepoImpl(gh<_i725.SuggetsionDs>()),
@@ -64,6 +73,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i583.DetailsUseCase>(
       () => _i583.DetailsUseCase(gh<_i700.DetailsRepo>()),
     );
+    gh.factory<_i623.SearchRepo>(
+      () => _i541.SearchRepoImpl(gh<_i561.SearchDs>()),
+    );
     gh.factory<_i1064.MoviesUseCase>(
       () => _i1064.MoviesUseCase(gh<_i1064.MoviesRepo>()),
     );
@@ -75,6 +87,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i123.HomeBloc>(
       () => _i123.HomeBloc(gh<_i1064.MoviesUseCase>()),
+    );
+    gh.factory<_i1044.SearchUsecase>(
+      () => _i1044.SearchUsecase(gh<_i623.SearchRepo>()),
+    );
+    gh.factory<_i206.SearchBloc>(
+      () => _i206.SearchBloc(gh<_i1044.SearchUsecase>()),
     );
     return this;
   }

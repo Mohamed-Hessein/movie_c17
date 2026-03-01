@@ -19,9 +19,11 @@ class IconApp {
   static String heart = "${PathImageAndIconApp.pathIcon}/heart.png";
   static String time = "${PathImageAndIconApp.pathIcon}/time.png";
   static String star = "${PathImageAndIconApp.pathIcon}/star.png";
+  static String searchIc = "${PathImageAndIconApp.pathIcon}/search_ic.png";
 }
 class ImageApp {
   static String bgHome = "${PathImageAndIconApp.pathImage}/bg.jpg";
   static String play = "${PathImageAndIconApp.pathImage}/play_mvoie.png";
+  static String emptyList = "${PathImageAndIconApp.pathImage}/empty_search_list.png";
   static String byDetails = "${PathImageAndIconApp.pathImage}/byDetails.jpg";
 }
