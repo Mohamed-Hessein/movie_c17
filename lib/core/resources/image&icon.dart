@@ -24,4 +24,10 @@ class ImageApp {
   static String bgHome = "${PathImageAndIconApp.pathImage}/bg.jpg";
   static String play = "${PathImageAndIconApp.pathImage}/play_mvoie.png";
   static String byDetails = "${PathImageAndIconApp.pathImage}/byDetails.jpg";
+  static String onboardingfav = "${PathImageAndIconApp.pathImage}/onboardingfav.png";
+  static String onboardingexplore = "${PathImageAndIconApp.pathImage}/onboardingexplore.png";
+  static String onboardingdisc = "${PathImageAndIconApp.pathImage}/onboardingdisc.png";
+  static String onboardingrate = "${PathImageAndIconApp.pathImage}/onboardingrate.png";
+  static String onboardingcreate = "${PathImageAndIconApp.pathImage}/onboardingcreate.png";
+  static String onboardingfinish = "${PathImageAndIconApp.pathImage}/onboardingfinish.png";
 }
