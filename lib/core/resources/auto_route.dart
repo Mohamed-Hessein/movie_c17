@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:movie_c17_me/features/details/presentation/screen/movie_details_screen.dart';
 import '../../features/home/data/model/MoviseResponse.dart';
 import '../../features/home/presentation/screen/home_screen.dart';
+import '../../features/home/presentation/screen/on_boarding_screen.dart';
 part 'auto_route.gr.dart';
+
 @AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
 class AppRouter extends RootStackRouter {
 
@@ -12,7 +14,10 @@ class AppRouter extends RootStackRouter {
 
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(page: HomeRoute.page,initial: true),
+    AutoRoute(page: OnboardingRoute.page, initial: true),
+    AutoRoute(page: HomeRoute.page),
     AutoRoute(page: MovieDetailsRoute.page),
   ];
 }
+
+
