@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:movie_c17_me/features/details/presentation/screen/movie_details_screen.dart';
+import '../../features/home/data/model/MoviseResponse.dart';
 import '../../features/home/presentation/screen/home_screen.dart';
 part 'auto_route.gr.dart';
 @AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
