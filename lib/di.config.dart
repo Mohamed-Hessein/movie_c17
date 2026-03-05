@@ -13,6 +13,12 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import 'core/api/api_manager.dart' as _i237;
+import 'features/browser/data/data_source/browser_ds.dart' as _i369;
+import 'features/browser/data/data_source/browser_ds_impl.dart' as _i343;
+import 'features/browser/data/repo/browsr_repo_impl.dart' as _i853;
+import 'features/browser/domain/repo/browser_repo.dart' as _i703;
+import 'features/browser/domain/usercase/browser_usecase.dart' as _i407;
+import 'features/browser/persentation/bloc/browser_bloc.dart' as _i609;
 import 'features/details/data/data_source/remote/details_ds.dart' as _i6;
 import 'features/details/data/data_source/remote/details_ds_impl.dart' as _i700;
 import 'features/details/data/data_source/remote/suggestions_ds_impl.dart'
@@ -49,6 +55,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i725.SuggetsionDs>(
       () => _i598.SuggestionsDsImpl(gh<_i237.ApiManager>()),
     );
+    gh.factory<_i369.BrowserDs>(
+      () => _i343.BrowserDsImpl(gh<_i237.ApiManager>()),
+    );
     gh.factory<_i6.DetailsDs>(
       () => _i700.DetailsDsImpl(gh<_i237.ApiManager>()),
     );
@@ -70,11 +79,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i580.SuggestionUsercase>(
       () => _i580.SuggestionUsercase(gh<_i1033.SuggetsionRepo>()),
     );
+    gh.factory<_i703.BrowserRepo>(
+      () => _i853.BrowsrRepoImpl(gh<_i369.BrowserDs>()),
+    );
     gh.factory<_i583.DetailsUseCase>(
       () => _i583.DetailsUseCase(gh<_i700.DetailsRepo>()),
     );
     gh.factory<_i623.SearchRepo>(
       () => _i541.SearchRepoImpl(gh<_i561.SearchDs>()),
+    );
+    gh.factory<_i407.BrowserUsecase>(
+      () => _i407.BrowserUsecase(gh<_i703.BrowserRepo>()),
     );
     gh.factory<_i1064.MoviesUseCase>(
       () => _i1064.MoviesUseCase(gh<_i1064.MoviesRepo>()),
@@ -87,6 +102,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i123.HomeBloc>(
       () => _i123.HomeBloc(gh<_i1064.MoviesUseCase>()),
+    );
+    gh.factory<_i609.BrowserBloc>(
+      () => _i609.BrowserBloc(gh<_i407.BrowserUsecase>()),
     );
     gh.factory<_i1044.SearchUsecase>(
       () => _i1044.SearchUsecase(gh<_i623.SearchRepo>()),

@@ -11,7 +11,7 @@ class ColorsApp {
   // Accents
   static const Color primaryGold = Color(0xFFFFD700);
   static const Color secondaryGold = Color(0xFFFFC107);
-
+static const Color textGlod = Color(0xFFF6BD00);
   // Text
   static const Color textPrimary = Color(0xFFFFFFFF);
   static const Color textSecondary = Color(0xFFE0E0E0);

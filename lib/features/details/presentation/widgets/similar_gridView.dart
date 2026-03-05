@@ -1,4 +1,5 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_c17_me/features/details/data/model/suggestion_model.dart';
@@ -16,17 +17,18 @@ class CusctomGridView extends StatelessWidget {
       child: GridView.builder(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
-          gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 16/9,mainAxisSpacing: 37,crossAxisSpacing: 37) ,itemCount:suggest.data?.movies?.length, itemBuilder: (context, index){
+          gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 2/3,mainAxisSpacing: 10,crossAxisSpacing: 10) ,itemCount:suggest.data?.movies?.length, itemBuilder: (context, index){
 
 
         return Stack(
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(16),
-              child: Image.network(
+              child: CachedNetworkImage(
 
-             suggest.data?.movies![index].backgroundImage ??'',
-                fit: BoxFit.contain,
+                imageUrl:    suggest.data?.movies![index].mediumCoverImage ??'',
+                placeholder: (context, url) => CircularProgressIndicator(),
+                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
             ),
             Positioned(
