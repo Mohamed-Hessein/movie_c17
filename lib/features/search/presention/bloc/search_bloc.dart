@@ -15,7 +15,7 @@ try{
 emit(state.copyWith(SearchStatus: RequestStatus.success,searchModel: res));
 
 }catch(e){
-  emit(state.copyWith(SearchStatus: RequestStatus.error));
+  emit(state.copyWith(SearchStatus: RequestStatus.error,    errorMassage: e.toString(), ));
 }
     });
   }
