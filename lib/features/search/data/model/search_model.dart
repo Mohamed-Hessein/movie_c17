@@ -25,6 +25,15 @@ class SearchModel {
     }
     return data;
   }
+
+  SearchModel copyWith({String? status, String? statusMessage, Data? data, Meta? meta}) {
+    return SearchModel(
+      status: status ?? this.status,
+      statusMessage: statusMessage ?? this.statusMessage,
+      data: data ?? this.data,
+      meta: meta ?? this.meta,
+    );
+  }
 }
 
 class Data {
@@ -57,6 +66,15 @@ class Data {
     }
     return data;
   }
+
+  Data copyWith({int? movieCount, int? limit, int? pageNumber, List<Movies>? movies}) {
+    return Data(
+      movieCount: movieCount ?? this.movieCount,
+      limit: limit ?? this.limit,
+      pageNumber: pageNumber ?? this.pageNumber,
+      movies: movies ?? this.movies,
+    );
+  }
 }
 
 class Movies {
@@ -87,33 +105,34 @@ class Movies {
   String? dateUploaded;
   int? dateUploadedUnix;
 
-  Movies(
-      {this.id,
-        this.url,
-        this.imdbCode,
-        this.title,
-        this.titleEnglish,
-        this.titleLong,
-        this.slug,
-        this.year,
-        this.rating,
-        this.runtime,
-        this.genres,
-        this.summary,
-        this.descriptionFull,
-        this.synopsis,
-        this.ytTrailerCode,
-        this.language,
-        this.mpaRating,
-        this.backgroundImage,
-        this.backgroundImageOriginal,
-        this.smallCoverImage,
-        this.mediumCoverImage,
-        this.largeCoverImage,
-        this.state,
-        this.torrents,
-        this.dateUploaded,
-        this.dateUploadedUnix});
+  Movies({
+    this.id,
+    this.url,
+    this.imdbCode,
+    this.title,
+    this.titleEnglish,
+    this.titleLong,
+    this.slug,
+    this.year,
+    this.rating,
+    this.runtime,
+    this.genres,
+    this.summary,
+    this.descriptionFull,
+    this.synopsis,
+    this.ytTrailerCode,
+    this.language,
+    this.mpaRating,
+    this.backgroundImage,
+    this.backgroundImageOriginal,
+    this.smallCoverImage,
+    this.mediumCoverImage,
+    this.largeCoverImage,
+    this.state,
+    this.torrents,
+    this.dateUploaded,
+    this.dateUploadedUnix,
+  });
 
   Movies.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -124,9 +143,9 @@ class Movies {
     titleLong = json['title_long'];
     slug = json['slug'];
     year = json['year'];
-    rating = json['rating'];
+    rating = (json['rating'] != null) ? (json['rating'] as num).toDouble() : null;
     runtime = json['runtime'];
-    genres = json['genres'].cast<String>();
+    genres = json['genres']?.cast<String>();
     summary = json['summary'];
     descriptionFull = json['description_full'];
     synopsis = json['synopsis'];
@@ -142,7 +161,7 @@ class Movies {
     if (json['torrents'] != null) {
       torrents = <Torrents>[];
       json['torrents'].forEach((v) {
-        torrents!.add(new Torrents.fromJson(v));
+        torrents!.add(Torrents.fromJson(v));
       });
     }
     dateUploaded = json['date_uploaded'];
@@ -150,36 +169,94 @@ class Movies {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['url'] = this.url;
-    data['imdb_code'] = this.imdbCode;
-    data['title'] = this.title;
-    data['title_english'] = this.titleEnglish;
-    data['title_long'] = this.titleLong;
-    data['slug'] = this.slug;
-    data['year'] = this.year;
-    data['rating'] = this.rating;
-    data['runtime'] = this.runtime;
-    data['genres'] = this.genres;
-    data['summary'] = this.summary;
-    data['description_full'] = this.descriptionFull;
-    data['synopsis'] = this.synopsis;
-    data['yt_trailer_code'] = this.ytTrailerCode;
-    data['language'] = this.language;
-    data['mpa_rating'] = this.mpaRating;
-    data['background_image'] = this.backgroundImage;
-    data['background_image_original'] = this.backgroundImageOriginal;
-    data['small_cover_image'] = this.smallCoverImage;
-    data['medium_cover_image'] = this.mediumCoverImage;
-    data['large_cover_image'] = this.largeCoverImage;
-    data['state'] = this.state;
-    if (this.torrents != null) {
-      data['torrents'] = this.torrents!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['url'] = url;
+    data['imdb_code'] = imdbCode;
+    data['title'] = title;
+    data['title_english'] = titleEnglish;
+    data['title_long'] = titleLong;
+    data['slug'] = slug;
+    data['year'] = year;
+    data['rating'] = rating;
+    data['runtime'] = runtime;
+    data['genres'] = genres;
+    data['summary'] = summary;
+    data['description_full'] = descriptionFull;
+    data['synopsis'] = synopsis;
+    data['yt_trailer_code'] = ytTrailerCode;
+    data['language'] = language;
+    data['mpa_rating'] = mpaRating;
+    data['background_image'] = backgroundImage;
+    data['background_image_original'] = backgroundImageOriginal;
+    data['small_cover_image'] = smallCoverImage;
+    data['medium_cover_image'] = mediumCoverImage;
+    data['large_cover_image'] = largeCoverImage;
+    data['state'] = state;
+    if (torrents != null) {
+      data['torrents'] = torrents!.map((v) => v.toJson()).toList();
     }
-    data['date_uploaded'] = this.dateUploaded;
-    data['date_uploaded_unix'] = this.dateUploadedUnix;
+    data['date_uploaded'] = dateUploaded;
+    data['date_uploaded_unix'] = dateUploadedUnix;
     return data;
+  }
+
+  Movies copyWith({
+    int? id,
+    String? url,
+    String? imdbCode,
+    String? title,
+    String? titleEnglish,
+    String? titleLong,
+    String? slug,
+    int? year,
+    double? rating,
+    int? runtime,
+    List<String>? genres,
+    String? summary,
+    String? descriptionFull,
+    String? synopsis,
+    String? ytTrailerCode,
+    String? language,
+    String? mpaRating,
+    String? backgroundImage,
+    String? backgroundImageOriginal,
+    String? smallCoverImage,
+    String? mediumCoverImage,
+    String? largeCoverImage,
+    String? state,
+    List<Torrents>? torrents,
+    String? dateUploaded,
+    int? dateUploadedUnix,
+  }) {
+    return Movies(
+      id: id ?? this.id,
+      url: url ?? this.url,
+      imdbCode: imdbCode ?? this.imdbCode,
+      title: title ?? this.title,
+      titleEnglish: titleEnglish ?? this.titleEnglish,
+      titleLong: titleLong ?? this.titleLong,
+      slug: slug ?? this.slug,
+      year: year ?? this.year,
+      rating: rating ?? this.rating,
+      runtime: runtime ?? this.runtime,
+      genres: genres ?? this.genres,
+      summary: summary ?? this.summary,
+      descriptionFull: descriptionFull ?? this.descriptionFull,
+      synopsis: synopsis ?? this.synopsis,
+      ytTrailerCode: ytTrailerCode ?? this.ytTrailerCode,
+      language: language ?? this.language,
+      mpaRating: mpaRating ?? this.mpaRating,
+      backgroundImage: backgroundImage ?? this.backgroundImage,
+      backgroundImageOriginal: backgroundImageOriginal ?? this.backgroundImageOriginal,
+      smallCoverImage: smallCoverImage ?? this.smallCoverImage,
+      mediumCoverImage: mediumCoverImage ?? this.mediumCoverImage,
+      largeCoverImage: largeCoverImage ?? this.largeCoverImage,
+      state: state ?? this.state,
+      torrents: torrents ?? this.torrents,
+      dateUploaded: dateUploaded ?? this.dateUploaded,
+      dateUploadedUnix: dateUploadedUnix ?? this.dateUploadedUnix,
+    );
   }
 }
 
@@ -199,21 +276,22 @@ class Torrents {
   String? dateUploaded;
   int? dateUploadedUnix;
 
-  Torrents(
-      {this.url,
-        this.hash,
-        this.quality,
-        this.type,
-        this.isRepack,
-        this.videoCodec,
-        this.bitDepth,
-        this.audioChannels,
-        this.seeds,
-        this.peers,
-        this.size,
-        this.sizeBytes,
-        this.dateUploaded,
-        this.dateUploadedUnix});
+  Torrents({
+    this.url,
+    this.hash,
+    this.quality,
+    this.type,
+    this.isRepack,
+    this.videoCodec,
+    this.bitDepth,
+    this.audioChannels,
+    this.seeds,
+    this.peers,
+    this.size,
+    this.sizeBytes,
+    this.dateUploaded,
+    this.dateUploadedUnix,
+  });
 
   Torrents.fromJson(Map<String, dynamic> json) {
     url = json['url'];
@@ -233,22 +311,56 @@ class Torrents {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['url'] = this.url;
-    data['hash'] = this.hash;
-    data['quality'] = this.quality;
-    data['type'] = this.type;
-    data['is_repack'] = this.isRepack;
-    data['video_codec'] = this.videoCodec;
-    data['bit_depth'] = this.bitDepth;
-    data['audio_channels'] = this.audioChannels;
-    data['seeds'] = this.seeds;
-    data['peers'] = this.peers;
-    data['size'] = this.size;
-    data['size_bytes'] = this.sizeBytes;
-    data['date_uploaded'] = this.dateUploaded;
-    data['date_uploaded_unix'] = this.dateUploadedUnix;
+    final Map<String, dynamic> data = {};
+    data['url'] = url;
+    data['hash'] = hash;
+    data['quality'] = quality;
+    data['type'] = type;
+    data['is_repack'] = isRepack;
+    data['video_codec'] = videoCodec;
+    data['bit_depth'] = bitDepth;
+    data['audio_channels'] = audioChannels;
+    data['seeds'] = seeds;
+    data['peers'] = peers;
+    data['size'] = size;
+    data['size_bytes'] = sizeBytes;
+    data['date_uploaded'] = dateUploaded;
+    data['date_uploaded_unix'] = dateUploadedUnix;
     return data;
+  }
+
+  Torrents copyWith({
+    String? url,
+    String? hash,
+    String? quality,
+    String? type,
+    String? isRepack,
+    String? videoCodec,
+    String? bitDepth,
+    String? audioChannels,
+    int? seeds,
+    int? peers,
+    String? size,
+    int? sizeBytes,
+    String? dateUploaded,
+    int? dateUploadedUnix,
+  }) {
+    return Torrents(
+      url: url ?? this.url,
+      hash: hash ?? this.hash,
+      quality: quality ?? this.quality,
+      type: type ?? this.type,
+      isRepack: isRepack ?? this.isRepack,
+      videoCodec: videoCodec ?? this.videoCodec,
+      bitDepth: bitDepth ?? this.bitDepth,
+      audioChannels: audioChannels ?? this.audioChannels,
+      seeds: seeds ?? this.seeds,
+      peers: peers ?? this.peers,
+      size: size ?? this.size,
+      sizeBytes: sizeBytes ?? this.sizeBytes,
+      dateUploaded: dateUploaded ?? this.dateUploaded,
+      dateUploadedUnix: dateUploadedUnix ?? this.dateUploadedUnix,
+    );
   }
 }
 
@@ -260,21 +372,27 @@ class Meta {
   Meta({this.migration, this.apiVersion, this.executionTime});
 
   Meta.fromJson(Map<String, dynamic> json) {
-    migration = json['migration'] != null
-        ? new Migration.fromJson(json['migration'])
-        : null;
+    migration = json['migration'] != null ? new Migration.fromJson(json['migration']) : null;
     apiVersion = json['api_version'];
     executionTime = json['execution_time'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = {};
     if (this.migration != null) {
       data['migration'] = this.migration!.toJson();
     }
     data['api_version'] = this.apiVersion;
     data['execution_time'] = this.executionTime;
     return data;
+  }
+
+  Meta copyWith({Migration? migration, int? apiVersion, String? executionTime}) {
+    return Meta(
+      migration: migration ?? this.migration,
+      apiVersion: apiVersion ?? this.apiVersion,
+      executionTime: executionTime ?? this.executionTime,
+    );
   }
 }
 
@@ -294,11 +412,20 @@ class Migration {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = {};
     data['message'] = this.message;
     data['old_base'] = this.oldBase;
     data['new_base'] = this.newBase;
     data['sunset'] = this.sunset;
     return data;
+  }
+
+  Migration copyWith({String? message, String? oldBase, String? newBase, String? sunset}) {
+    return Migration(
+      message: message ?? this.message,
+      oldBase: oldBase ?? this.oldBase,
+      newBase: newBase ?? this.newBase,
+      sunset: sunset ?? this.sunset,
+    );
   }
 }
