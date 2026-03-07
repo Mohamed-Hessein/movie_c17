@@ -32,12 +32,28 @@ class HistoryBloc  extends Bloc<HistoryEvent, HsitoryState>{
       try{
         emit(state.copyWith(getMoviesStatus:  RequestStatus.loading));
         QuerySnapshot<LastSeenMovie> history = await getHistoryUsecase.call().first;
+        var historyStream = getHistoryUsecase.call();
+        var historySnapshot = await historyStream.first;
+        print('History docs length: ${historySnapshot.docs.length}');
 
+        List<detailsOfMovie> film = await Future.wait(
+            history.docs.map((e) async {
+              var movieFromHome = await detailsUseCase.call(e.data().ids);
+              print('l;;epg46i[ui65 ${e.data().ids}');
 
-      List<detailsOfMovie> movies = [] ;
+              return detailsOfMovie(
+                data: Data(
+                  movie: Movie(
+                    id: movieFromHome.data?.movie?.id,
+                    title: movieFromHome.data?.movie?.title,
+                    largeCoverImage: movieFromHome.data?.movie?.largeCoverImage,
+                    rating: movieFromHome.data?.movie?.rating,
 
-        List<detailsOfMovie> film = await Future.wait(history.docs.map((e) async =>detailsUseCase.call(e.data().ids)).toList());
-
+                  ),
+                ),
+              );
+            }).toList()
+        );
 
       emit(
 

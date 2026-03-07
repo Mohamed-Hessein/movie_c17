@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,14 +16,21 @@ class GridViewFilms extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return   BlocConsumer<HistoryBloc, HsitoryState>(
-      builder: (BuildContext context,  state) { return  SizedBox(
+      builder: (BuildContext context,  state) {
+
+        if(state.getMoviesStatus == RequestStatus.error){
+          return Text(state.errorMassage.toString());
+
+        }
+        print('erorrrrrrrr?${state.errorMassage.toString()}');
+        return  SizedBox(
         child: GridView.builder(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 2/3,mainAxisSpacing: 10,crossAxisSpacing: 10) ,itemCount:state.lastSeenMovie?.length, itemBuilder: (context, index){
 
 var bloc = state.lastSeenMovie?[index];
-          return Stack(
+return Stack(
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
@@ -61,7 +70,13 @@ var bloc = state.lastSeenMovie?[index];
             ],
           );
         }),
-      ); }, listener: (BuildContext context,  state) {  },
+
+      );
+
+        }, listener: (BuildContext context,  state) {
+
+
+    },
 
     );
   }

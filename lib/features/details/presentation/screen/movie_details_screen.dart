@@ -25,7 +25,7 @@ import '../widgets/similar_gridView.dart';
 @RoutePage()
 class MovieDetailsScreen extends StatelessWidget {
   Movies movies ;
-    MovieDetailsScreen({super.key,required this.movies});
+  MovieDetailsScreen({super.key,required this.movies});
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +33,11 @@ class MovieDetailsScreen extends StatelessWidget {
     return BlocProvider(
       create:(context) => getIt<DetailsBloc>()..add(getDetails(movies.id))..add(getSuggest(movies.id)),
       child: BlocConsumer<DetailsBloc, DetailsState>(
-        listener: (context, state){
+          listener: (context, state){
 
 
 
-        },
+          },
           builder: (context, state) {
 
             if (state.getDetailsStatus == RequestStatus.loading) {
@@ -51,101 +51,100 @@ class MovieDetailsScreen extends StatelessWidget {
             }
 
             final movie = state.detailsOfMovies?.data?.movie;
-final suggest= state.suggestions;
-if(suggest ==null){
-  return SizedBox();
-}
+            final suggest= state.suggestions;
+            if(suggest ==null){
+              return SizedBox();
+            }
             if (movie == null) {
               return SizedBox();
 
             }
             else
-   {
-        return      Scaffold(
-            backgroundColor: ColorsApp.background,
-            extendBodyBehindAppBar: true,
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              automaticallyImplyActions: false,
-              leadingWidth: 50,
-              automaticallyImplyLeading: false,
-              title: GestureDetector(onTap: (){context.pop();},
-                  child: ImageIcon(AssetImage(IconApp.arrowBack),color: Colors.white,size: 24,)),
-              actions: [ImageIcon(AssetImage(IconApp.saveIc),color: Colors.white,),SizedBox(width: 15,)],),
-            body: SingleChildScrollView(child: Column(
+            {
+              return      Scaffold(
+                  backgroundColor: ColorsApp.background,
+                  extendBodyBehindAppBar: true,
+                  appBar: AppBar(
+                    backgroundColor: Colors.transparent,
+                    automaticallyImplyActions: false,
+                    leadingWidth: 50,
+                    automaticallyImplyLeading: false,
+                    title: GestureDetector(onTap: (){context.pop();},
+                        child: ImageIcon(AssetImage(IconApp.arrowBack),color: Colors.white,size: 24,)),
+                    actions: [ImageIcon(AssetImage(IconApp.saveIc),color: Colors.white,),SizedBox(width: 15,)],),
+                  body: SingleChildScrollView(child: Column(
 
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Image.network(movie.mediumCoverImage ??'',width: 430.w,height: 630.h,fit: BoxFit.cover,),
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Image.network(movie.mediumCoverImage ??'',width: 430.w,height: 630.h,fit: BoxFit.cover,),
 
-                    Center(
-                      child: Image.asset(ImageApp.play,width: 97.w,height: 97.h,),
-                    ),
-                    Positioned(
-                        bottom: 100,
-                        left: 16,
-                        right: 16,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(textAlign: TextAlign.center,movie.title??'',style: StyleApp.lgText,),
-                        )),
-                    Positioned(
-                        bottom: 60.sp,
-                        left: 16,
-                        right: 16,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(textAlign: TextAlign.center,movie.dateUploaded!.substring(0,4)??'',style: StyleApp.lgText,),
-                        )),
-                  ],
-                ),
-                CustomBtn(text: 'watch', onPressed: () {  },),
-                SizedBox(height: 15.h,),
-                RowRating(star:movie.torrents?.first.seeds??'', time: movies.runtime?? '', fav: movies.rating,),
+                          Center(
+                            child: Image.asset(ImageApp.play,width: 97.w,height: 97.h,),
+                          ),
+                          Positioned(
+                              bottom: 100,
+                              left: 16,
+                              right: 16,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Text(textAlign: TextAlign.center,movie.title??'',style: StyleApp.lgText,),
+                              )),
+                          Positioned(
+                              bottom: 60.sp,
+                              left: 16,
+                              right: 16,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Text(textAlign: TextAlign.center,movie.dateUploaded!.substring(0,4)??'',style: StyleApp.lgText,),
+                              )),
+                        ],
+                      ),
+                      CustomBtn(text: 'watch', onPressed: () {  },),
+                      SizedBox(height: 15.h,),
+                      RowRating(star:movie.torrents?.first.seeds??'', time: movies.runtime?? '', fav: movies.rating,),
 
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Text(AppString.subTitleDetailsScreenShots,style: StyleApp.lgText,),
-                ),SizedBox(height: 1.h,),
-                ScreenShotList(image: movie.backgroundImage),
-                SizedBox(height: 9.h,),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Text(AppString.simialr,style: StyleApp.lgText,),
-                ),SizedBox(height: 1.h,),
-                CusctomGridView(suggest: suggest,),
-                SizedBox(height: 5.h,),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Text(AppString.summary,style: StyleApp.lgText,),
-                ),SizedBox(height: 1.h,),
-                Text(
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(AppString.subTitleDetailsScreenShots,style: StyleApp.lgText,),
+                      ),SizedBox(height: 1.h,),
+                      ScreenShotList(image: movie.backgroundImage),
+                      SizedBox(height: 9.h,),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(AppString.simialr,style: StyleApp.lgText,),
+                      ),SizedBox(height: 1.h,),
+                      CusctomGridView(suggest: suggest,),
+                      SizedBox(height: 5.h,),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(AppString.summary,style: StyleApp.lgText,),
+                      ),SizedBox(height: 1.h,),
+                      Text(
 
-                    style:StyleApp.smText.copyWith(letterSpacing: 0) ,'${movies.summary}')
+                          style:StyleApp.smText.copyWith(letterSpacing: 0) ,'${movies.summary}')
 
 
-                , Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Text(AppString.cast,style: StyleApp.lgText,),
-                ),SizedBox(height: 1.h,),
-                ListCastView( name:movie.title??'', image: movie.smallCoverImage??'',),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Text(AppString.genres,style: StyleApp.lgText,),
-                ),SizedBox(height: 1.h,),
+                      , Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(AppString.cast,style: StyleApp.lgText,),
+                      ),SizedBox(height: 1.h,),
+                      ListCastView( name:movie.title??'', image: movie.smallCoverImage??'',),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(AppString.genres,style: StyleApp.lgText,),
+                      ),SizedBox(height: 1.h,),
 
-                genresGrid(geners: movie, count: movie.genres?.length,),
-              ],)));
-      }
+                      genresGrid(geners: movie, count: movie.genres?.length,),
+                    ],)));
+            }
 
-        }
+          }
 
       ),
     );
   }
 }
-
