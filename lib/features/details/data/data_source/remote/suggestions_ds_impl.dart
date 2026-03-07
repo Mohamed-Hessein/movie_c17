@@ -9,14 +9,14 @@ class SuggestionsDsImpl implements SuggetsionDs {
   SuggestionsDsImpl(this.apiManager);
   @override
   Future<Suggestions> getSeuggestion(id)async {
-try{
-  var res =await apiManager.get(EndPoint.suggestions,queryParameters: {
-    'movie_id': id
-  });
-  Suggestions suggest = Suggestions.fromJson(res.data);
-  return suggest;
-}catch(e){
-  rethrow;
-}
+    try{
+      var res =await apiManager.get(EndPoint.suggestions,queryParameters: {
+        'movie_id': id
+      });
+      Suggestions suggest = Suggestions.fromJson(res.data);
+      return suggest;
+    }catch(e){
+      rethrow;
+    }
   }
 }

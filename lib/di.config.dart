@@ -13,6 +13,12 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import 'core/api/api_manager.dart' as _i237;
+import 'features/browser/data/data_source/browser_ds.dart' as _i369;
+import 'features/browser/data/data_source/browser_ds_impl.dart' as _i343;
+import 'features/browser/data/repo/browsr_repo_impl.dart' as _i853;
+import 'features/browser/domain/repo/browser_repo.dart' as _i703;
+import 'features/browser/domain/usercase/browser_usecase.dart' as _i407;
+import 'features/browser/persentation/bloc/browser_bloc.dart' as _i609;
 import 'features/details/data/data_source/remote/details_ds.dart' as _i6;
 import 'features/details/data/data_source/remote/details_ds_impl.dart' as _i700;
 import 'features/details/data/data_source/remote/suggestions_ds_impl.dart'
@@ -31,6 +37,28 @@ import 'features/home/data/repo/movies_repo_impl.dart' as _i558;
 import 'features/home/domain/repo/move_repo.dart' as _i1064;
 import 'features/home/domain/usecase/movies_use_case.dart' as _i1064;
 import 'features/home/presentation/bloc/home_bloc.dart' as _i123;
+import 'features/profile/data/data_sourc/remote/firebase_history_ds.dart'
+    as _i176;
+import 'features/profile/data/data_sourc/remote/firebase_history_ds_impl.dart'
+    as _i359;
+import 'features/profile/data/data_sourc/remote/get_history_ds.dart' as _i224;
+import 'features/profile/data/data_sourc/remote/get_history_ds_ipm.dart'
+    as _i81;
+import 'features/profile/data/data_sourc/repo/get_history_repo_impl.dart'
+    as _i620;
+import 'features/profile/data/data_sourc/repo/save_history_repo_impl.dart'
+    as _i632;
+import 'features/profile/domain/repo/get_history_repo.dart' as _i71;
+import 'features/profile/domain/repo/history_rep.dart' as _i24;
+import 'features/profile/domain/usecase/get_history_usecase.dart' as _i448;
+import 'features/profile/domain/usecase/history_usecase.dart' as _i383;
+import 'features/profile/presentation/bloc/history_bloc.dart' as _i750;
+import 'features/search/data/data_source/search_ds_impl.dart' as _i234;
+import 'features/search/data/data_source/serach_ds.dart' as _i561;
+import 'features/search/data/repo/search_repo_impl.dart' as _i541;
+import 'features/search/domain/repo/search_repo.dart' as _i623;
+import 'features/search/domain/usecase/search_usecase.dart' as _i1044;
+import 'features/search/presention/bloc/search_bloc.dart' as _i206;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -40,11 +68,26 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.lazySingleton<_i237.ApiManager>(() => _i237.ApiManager());
+    gh.lazySingleton<_i176.FirebaseHistoryDs>(
+      () => _i359.FirebaseHistoryDsImpl(),
+    );
     gh.factory<_i725.SuggetsionDs>(
       () => _i598.SuggestionsDsImpl(gh<_i237.ApiManager>()),
     );
+    gh.factory<_i369.BrowserDs>(
+      () => _i343.BrowserDsImpl(gh<_i237.ApiManager>()),
+    );
+    gh.factory<_i24.HistoryRep>(
+      () => _i632.SaveHistoryRepoImpl(gh<_i176.FirebaseHistoryDs>()),
+    );
     gh.factory<_i6.DetailsDs>(
       () => _i700.DetailsDsImpl(gh<_i237.ApiManager>()),
+    );
+    gh.factory<_i224.GetHistoryDs>(
+      () => _i81.GetHistoryDsIpm(gh<_i176.FirebaseHistoryDs>()),
+    );
+    gh.factory<_i561.SearchDs>(
+      () => _i234.SearchDsImpl(gh<_i237.ApiManager>()),
     );
     gh.factory<_i1033.SuggetsionRepo>(
       () => _i296.SuggestionRepoImpl(gh<_i725.SuggetsionDs>()),
@@ -55,14 +98,29 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i950.MoviesRemoteDs>(
       () => _i1050.MoviesRemoteDsImpl(gh<_i237.ApiManager>()),
     );
+    gh.factory<_i383.HistoryUsecase>(
+      () => _i383.HistoryUsecase(gh<_i24.HistoryRep>()),
+    );
     gh.factory<_i1064.MoviesRepo>(
       () => _i558.MoviesRepoImpl(gh<_i950.MoviesRemoteDs>()),
     );
     gh.factory<_i580.SuggestionUsercase>(
       () => _i580.SuggestionUsercase(gh<_i1033.SuggetsionRepo>()),
     );
+    gh.factory<_i71.GetHistoryRepo>(
+      () => _i620.GetHistoryRepoImpl(gh<_i224.GetHistoryDs>()),
+    );
+    gh.factory<_i703.BrowserRepo>(
+      () => _i853.BrowsrRepoImpl(gh<_i369.BrowserDs>()),
+    );
     gh.factory<_i583.DetailsUseCase>(
       () => _i583.DetailsUseCase(gh<_i700.DetailsRepo>()),
+    );
+    gh.factory<_i623.SearchRepo>(
+      () => _i541.SearchRepoImpl(gh<_i561.SearchDs>()),
+    );
+    gh.factory<_i407.BrowserUsecase>(
+      () => _i407.BrowserUsecase(gh<_i703.BrowserRepo>()),
     );
     gh.factory<_i1064.MoviesUseCase>(
       () => _i1064.MoviesUseCase(gh<_i1064.MoviesRepo>()),
@@ -75,6 +133,25 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i123.HomeBloc>(
       () => _i123.HomeBloc(gh<_i1064.MoviesUseCase>()),
+    );
+    gh.factory<_i609.BrowserBloc>(
+      () => _i609.BrowserBloc(gh<_i407.BrowserUsecase>()),
+    );
+    gh.factory<_i448.GetHistoryUsecase>(
+      () => _i448.GetHistoryUsecase(gh<_i71.GetHistoryRepo>()),
+    );
+    gh.factory<_i1044.SearchUsecase>(
+      () => _i1044.SearchUsecase(gh<_i623.SearchRepo>()),
+    );
+    gh.factory<_i750.HistoryBloc>(
+      () => _i750.HistoryBloc(
+        gh<_i383.HistoryUsecase>(),
+        gh<_i448.GetHistoryUsecase>(),
+        gh<_i583.DetailsUseCase>(),
+      ),
+    );
+    gh.factory<_i206.SearchBloc>(
+      () => _i206.SearchBloc(gh<_i1044.SearchUsecase>()),
     );
     return this;
   }

@@ -20,16 +20,15 @@ class IconApp {
   static String time = "${PathImageAndIconApp.pathIcon}/time.png";
   static String star = "${PathImageAndIconApp.pathIcon}/star.png";
   static String searchIc = "${PathImageAndIconApp.pathIcon}/search_ic.png";
+  static String menuIc = "${PathImageAndIconApp.pathIcon}/menu_ic.png";
+  static String folderIc = "${PathImageAndIconApp.pathIcon}/Folder.png";
+
 }
 class ImageApp {
   static String bgHome = "${PathImageAndIconApp.pathImage}/bg.jpg";
   static String play = "${PathImageAndIconApp.pathImage}/play_mvoie.png";
   static String emptyList = "${PathImageAndIconApp.pathImage}/empty_search_list.png";
   static String byDetails = "${PathImageAndIconApp.pathImage}/byDetails.jpg";
-  static String onboardingfav = "${PathImageAndIconApp.pathImage}/onboardingfav.png";
-  static String onboardingexplore = "${PathImageAndIconApp.pathImage}/onboardingexplore.png";
-  static String onboardingdisc = "${PathImageAndIconApp.pathImage}/onboardingdisc.png";
-  static String onboardingrate = "${PathImageAndIconApp.pathImage}/onboardingrate.png";
-  static String onboardingcreate = "${PathImageAndIconApp.pathImage}/onboardingcreate.png";
-  static String onboardingfinish = "${PathImageAndIconApp.pathImage}/onboardingfinish.png";
+  static String byProfile = "${PathImageAndIconApp.pathImage}/gamer.png";
+
 }
