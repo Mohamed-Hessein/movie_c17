@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movie/core/resources/colors_app.dart';
-import 'package:movie/core/resources/image&icon.dart';
-import 'package:movie/core/resources/style_app.dart';
+
+import '../../../core/resources/colors_app.dart';
+import '../../../core/resources/image&icon.dart';
+import '../../../core/resources/style_app.dart';
 
 class FavoritePage extends StatelessWidget {
   final VoidCallback onNext;
@@ -19,7 +20,7 @@ class FavoritePage extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          
+
           Positioned.fill(
             child: Container(
               decoration: BoxDecoration(

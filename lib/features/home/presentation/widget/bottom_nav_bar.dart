@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-
-import '../../../../core/resources/colors_app.dart';
-import '../../../../core/resources/image&icon.dart';
-import '../bloc/home_bloc.dart';
-import '../bloc/home_event.dart';
-import '../bloc/home_state.dart';
+import 'package:movie_c17_me/core/resources/colors_app.dart';
+import 'package:movie_c17_me/core/resources/image&icon.dart';
+import 'package:movie_c17_me/features/home/presentation/bloc/home_bloc.dart';
+import 'package:movie_c17_me/features/home/presentation/bloc/home_event.dart';
+import 'package:movie_c17_me/features/home/presentation/bloc/home_state.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({super.key});

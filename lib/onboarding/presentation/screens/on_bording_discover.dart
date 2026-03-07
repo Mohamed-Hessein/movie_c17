@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie/core/resources/colors_app.dart';
-import 'package:movie/core/resources/style_app.dart';
+
+import '../../../core/resources/colors_app.dart';
+import '../../../core/resources/style_app.dart';
 
 class DiscoverPage extends StatelessWidget {
   const DiscoverPage({super.key});
@@ -24,7 +25,7 @@ class DiscoverPage extends StatelessWidget {
               end: Alignment.bottomCenter,
               colors: [
                 Colors.transparent,
-               Color(0xFF084250).withOpacity(0.8),
+                Color(0xFF084250).withOpacity(0.8),
                 Color(0xFF084250).withOpacity(0.3),
                 Colors.black,
               ],

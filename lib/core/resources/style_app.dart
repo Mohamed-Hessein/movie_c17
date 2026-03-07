@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'colors_app.dart';
+import 'package:movie_c17_me/core/resources/colors_app.dart';
 
 class StyleApp {
   static TextStyle smText = GoogleFonts.poppins(
@@ -19,5 +18,10 @@ class StyleApp {
       fontSize: 24.sp,
       fontWeight: FontWeight.w700,
       color: ColorsApp.textPrimary
+  );static TextStyle profileText = GoogleFonts.poppins(
+      fontSize: 36.sp,
+      fontWeight: FontWeight.w700,
+      color: ColorsApp.textPrimary
   );
+
 }

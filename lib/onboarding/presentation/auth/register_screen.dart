@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie/core/resources/colors_app.dart';
-import 'package:movie/core/resources/image&icon.dart';
-import 'package:movie/core/resources/style_app.dart';
 
 import '../../../core/resources/auto_route.dart';
+import '../../../core/resources/colors_app.dart';
+import '../../../core/resources/image&icon.dart';
+import '../../../core/resources/style_app.dart';
 
 @RoutePage()
 class RegisterScreen extends StatefulWidget {

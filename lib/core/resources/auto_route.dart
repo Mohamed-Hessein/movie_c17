@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
+import '../../features/home/data/model/MoviseResponse.dart' show Movies;
 import '../../onboarding/presentation/auth/forget_password_screen.dart';
 import '../../onboarding/presentation/auth/login_screen.dart';
 import '../../onboarding/presentation/auth/register_screen.dart';
@@ -24,5 +25,3 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: MovieDetailsRoute.page),
   ];
 }
-
-

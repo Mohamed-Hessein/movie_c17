@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie/core/resources/colors_app.dart';
-import 'package:movie/core/resources/style_app.dart';
+
+import '../../../core/resources/colors_app.dart';
+import '../../../core/resources/style_app.dart';
 
 class CreatePage extends StatelessWidget {
   const CreatePage({super.key});
@@ -17,7 +18,7 @@ class CreatePage extends StatelessWidget {
               end: Alignment.bottomCenter,
               colors: [
                 Colors.transparent,
-               Color(0xFF4C2471).withOpacity(0.3),
+                Color(0xFF4C2471).withOpacity(0.3),
                 Colors.black.withOpacity(0.9),
                 Colors.black,
               ],

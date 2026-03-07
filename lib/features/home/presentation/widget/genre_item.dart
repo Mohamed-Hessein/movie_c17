@@ -2,12 +2,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../core/resources/app_string.dart';
-import '../../../../core/resources/auto_route.dart';
-import '../../../../core/resources/colors_app.dart';
-import '../../../../core/resources/image&icon.dart';
-import '../../../../core/resources/style_app.dart';
+import 'package:movie_c17_me/core/resources/app_string.dart';
+import 'package:movie_c17_me/core/resources/auto_route.dart';
+import 'package:movie_c17_me/core/resources/colors_app.dart';
+import 'package:movie_c17_me/core/resources/image&icon.dart';
+import 'package:movie_c17_me/core/resources/style_app.dart';
+import 'package:movie_c17_me/features/home/presentation/bloc/home_bloc.dart';
+import 'package:movie_c17_me/features/home/presentation/bloc/home_state.dart';
 class ActionItem extends StatelessWidget {
   String title;
   final List<dynamic> movies;
@@ -51,7 +52,7 @@ class ActionItem extends StatelessWidget {
               final movie = movies[index];
               return GestureDetector(
                 onTap: (){
-                  context.pushRoute(const MovieDetailsRoute());
+                  context.pushRoute( MovieDetailsRoute(movies: movie),);
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.37,

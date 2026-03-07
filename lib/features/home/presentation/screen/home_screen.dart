@@ -1,17 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie/features/home/presentation/screen/tabs/explore_tab.dart';
-import 'package:movie/features/home/presentation/screen/tabs/home_tab.dart';
-import 'package:movie/features/home/presentation/screen/tabs/profile_tab.dart';
-import 'package:movie/features/home/presentation/screen/tabs/search_tab.dart';
-
-import '../../../../core/resources/colors_app.dart';
-import '../../../../di.dart';
-import '../bloc/home_bloc.dart';
-import '../bloc/home_event.dart';
-import '../bloc/home_state.dart';
-import '../widget/bottom_nav_bar.dart';
+import 'package:movie_c17_me/core/resources/colors_app.dart';
+import 'package:movie_c17_me/core/resources/image&icon.dart';
+import 'package:movie_c17_me/di.dart';
+import 'package:movie_c17_me/features/home/presentation/bloc/home_bloc.dart';
+import 'package:movie_c17_me/features/home/presentation/bloc/home_event.dart';
+import 'package:movie_c17_me/features/home/presentation/bloc/home_state.dart';
+import 'package:movie_c17_me/features/browser/persentation/screen/explore_tab.dart';
+import 'package:movie_c17_me/features/home/presentation/screen/tabs/home_tab.dart';
+import 'package:movie_c17_me/features/profile/presentation/screen/profile_tab.dart';
+import 'package:movie_c17_me/features/search/presention/screen/search_tab.dart';
+import 'package:movie_c17_me/features/home/presentation/widget/bottom_nav_bar.dart';
 @RoutePage()
 class HomeScreen extends StatelessWidget {
    HomeScreen({super.key});

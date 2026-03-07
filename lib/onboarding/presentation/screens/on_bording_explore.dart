@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie/core/resources/colors_app.dart';
-import 'package:movie/core/resources/style_app.dart';
+
+import '../../../core/resources/colors_app.dart';
+import '../../../core/resources/style_app.dart';
 
 class ExplorePage extends StatelessWidget {
   const ExplorePage({super.key});

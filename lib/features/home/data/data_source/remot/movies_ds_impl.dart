@@ -1,9 +1,9 @@
 
 import 'package:injectable/injectable.dart';
-import '../../../../../core/api/api_manager.dart';
-import '../../../../../core/api/end_point.dart';
-import '../../model/MoviseResponse.dart';
-import 'movies_ds.dart';
+import 'package:movie_c17_me/core/api/api_manager.dart';
+import 'package:movie_c17_me/core/api/end_point.dart';
+import 'package:movie_c17_me/features/home/data/data_source/remot/movies_ds.dart';
+import 'package:movie_c17_me/features/home/data/model/MoviseResponse.dart';
 
 @Injectable(as: MoviesRemoteDs)
 class MoviesRemoteDsImpl implements MoviesRemoteDs{
@@ -14,8 +14,8 @@ class MoviesRemoteDsImpl implements MoviesRemoteDs{
     try {
       var response = await apiManager.get(EndPoint.moviesList,
         queryParameters: {
-          'sort_by': sortBy,
-          'limit': 20,
+
+
         },
       );
       MoviesResponse moviesResponse = MoviesResponse.fromJson(response.data);

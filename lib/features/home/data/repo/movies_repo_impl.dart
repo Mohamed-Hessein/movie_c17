@@ -1,9 +1,7 @@
 import 'package:injectable/injectable.dart';
-
-
-import '../../domain/repo/move_repo.dart';
-import '../data_source/remot/movies_ds.dart';
-import '../model/MoviseResponse.dart';
+import 'package:movie_c17_me/features/home/data/data_source/remot/movies_ds.dart';
+import 'package:movie_c17_me/features/home/data/model/MoviseResponse.dart';
+import 'package:movie_c17_me/features/home/domain/repo/move_repo.dart';
 
 @Injectable(as: MoviesRepo)
 class MoviesRepoImpl implements MoviesRepo{

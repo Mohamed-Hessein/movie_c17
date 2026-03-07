@@ -1,9 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
-
-import '../../domain/usecase/movies_use_case.dart';
-import 'home_event.dart';
-import 'home_state.dart';
+import 'package:movie_c17_me/features/home/domain/usecase/movies_use_case.dart';
+import 'package:movie_c17_me/features/home/presentation/bloc/home_event.dart';
+import 'package:movie_c17_me/features/home/presentation/bloc/home_state.dart';
 
 @injectable
 class HomeBloc extends Bloc<HomeEvent, HomeState> {

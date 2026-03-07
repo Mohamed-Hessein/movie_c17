@@ -1,12 +1,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../../core/resources/colors_app.dart';
-import '../../bloc/home_bloc.dart';
-import '../../bloc/home_state.dart';
-import '../../widget/genre_item.dart';
-import '../../widget/new_movies_item.dart';
+import 'package:movie_c17_me/core/resources/colors_app.dart';
+import 'package:movie_c17_me/core/resources/image&icon.dart';
+import 'package:movie_c17_me/features/home/presentation/bloc/home_bloc.dart';
+import 'package:movie_c17_me/features/home/presentation/bloc/home_state.dart';
+import 'package:movie_c17_me/features/home/presentation/widget/genre_item.dart';
+import 'package:movie_c17_me/features/home/presentation/widget/courser_scroll.dart';
+import 'package:movie_c17_me/features/home/presentation/widget/new_movies_item.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});

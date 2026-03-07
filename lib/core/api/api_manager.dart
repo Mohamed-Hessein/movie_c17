@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movie_c17_me/core/api/constants_api_manager.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-
-import 'constants_api_manager.dart';
 
 @lazySingleton
 class ApiManager {

@@ -2,14 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:movie_c17_me/core/resources/colors_app.dart';
+import 'package:movie_c17_me/core/resources/image&icon.dart';
+import 'package:movie_c17_me/core/resources/style_app.dart';
+import 'package:movie_c17_me/features/home/presentation/bloc/home_bloc.dart';
+import 'package:movie_c17_me/features/home/presentation/bloc/home_event.dart';
 
 import '../../../../core/resources/auto_route.dart';
-import '../../../../core/resources/colors_app.dart';
-import '../../../../core/resources/image&icon.dart';
-import '../../../../core/resources/style_app.dart';
-import '../bloc/home_bloc.dart';
-import '../bloc/home_event.dart';
 class CourserScroll extends StatelessWidget {
 
   final List<dynamic> movies;
@@ -45,7 +44,7 @@ class CourserScroll extends StatelessWidget {
           builder: (BuildContext context) {
             return GestureDetector(
               onTap: (){
-                context.pushRoute(const MovieDetailsRoute());
+                context.pushRoute( MovieDetailsRoute(movies: movie));
               },
               child: Container(
                   width: MediaQuery.of(context).size.width * 0.6,
@@ -59,12 +58,12 @@ class CourserScroll extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(20.0),
                         child: Image.network(
-                          movie.mediumCoverImage ?? "", // رابط الصورة من الـ API
+                          movie.mediumCoverImage ?? "",
                           fit: BoxFit.cover,
                           height: double.infinity,
                           width: double.infinity,
                           errorBuilder: (context, error, stackTrace) =>
-                              Image.asset(ImageApp.bgHome, fit: BoxFit.cover), // صورة احتياطية
+                              Image.asset(ImageApp.bgHome, fit: BoxFit.cover),
                         ),
                       ),
 
@@ -81,7 +80,7 @@ class CourserScroll extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "${movie.rating ?? 0.0}", // التقييم الحقيقي
+                                "${movie.rating ?? 0.0}",
                                 style: StyleApp.smText,
                               ),
                               const SizedBox(width: 4),

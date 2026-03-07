@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie/core/resources/style_app.dart';
+
+import '../../../core/resources/style_app.dart';
 
 class FinishPage extends StatelessWidget {
   const FinishPage({super.key});

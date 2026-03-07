@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
-import '../../data/model/MoviseResponse.dart';
-import '../repo/move_repo.dart';
+import 'package:movie_c17_me/features/home/data/model/MoviseResponse.dart';
+import 'package:movie_c17_me/features/home/domain/repo/move_repo.dart';
 
 @injectable
 class MoviesUseCase {

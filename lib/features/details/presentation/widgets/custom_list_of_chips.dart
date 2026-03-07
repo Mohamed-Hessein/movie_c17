@@ -1,48 +1,82 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/resources/colors_app.dart';
 import '../../../../core/resources/image&icon.dart';
 
-class ChipsListCustom extends StatelessWidget {
-  ChipsListCustom({super.key});
-  List<String> chipsIc =[IconApp.heart,IconApp.time,IconApp.star];
+class  RowRating extends StatelessWidget {
+  RowRating({super.key,required this.star,required this.time,required this.fav});
+  dynamic fav;
+  dynamic time;
+  dynamic star;
+
   @override
   Widget build(BuildContext context) {
-    return   Center(
-      child: SizedBox(
-        height: 50.h,
-        child: ListView.separated(
-          shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          itemCount: chipsIc.length,
-          itemBuilder: (context, index) {
-            return Chip(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
+    return             Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+          decoration: BoxDecoration(
+            color: Color(0xff2A2A2A),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Row(
+            children: [
+              ImageIcon(AssetImage(IconApp.heart),color: ColorsApp.primaryGold,),
+              SizedBox(width: 6),
+              Text(
+                '$fav',
+                style: TextStyle(color: Colors.white, fontSize: 16),
               ),
-              backgroundColor: ColorsApp.textMuted,
-              label: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ImageIcon(
-                    AssetImage(chipsIc[index]),
-                    color: ColorsApp.primaryGold,
-                  ),
-                  SizedBox(width: 4),
-                  Text(
-                    '15',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
-            );
-          },
-          separatorBuilder: (_, __) => SizedBox(width: 16),
+            ],
+          ),
         ),
-      ),
+
+
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+          decoration: BoxDecoration(
+            color: Color(0xff2A2A2A),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Row(
+            children: [
+              ImageIcon(AssetImage(IconApp.time),color: ColorsApp.primaryGold,),
+
+              SizedBox(width: 6),
+              Text(
+               '$time',
+                style: TextStyle(color: Colors.white, fontSize: 16),
+              ),
+            ],
+          ),
+        ),
+
+
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+          decoration: BoxDecoration(
+            color: Color(0xff2A2A2A),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Row(
+            children: [
+              ImageIcon(AssetImage(IconApp.star),color: ColorsApp.primaryGold,),
+
+              SizedBox(width: 6),
+              Text(
+               '$star',
+                style: TextStyle(color: Colors.white, fontSize: 16),
+              ),
+            ],
+          ),
+        ),
+
+      ],
     );
   }
 }

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-
-import '../../../../core/resources/colors_app.dart';
-import '../../../../core/resources/image&icon.dart';
-import '../bloc/home_bloc.dart';
-import '../bloc/home_state.dart';
-import 'courser_scroll.dart';
+import 'package:movie_c17_me/core/resources/colors_app.dart';
+import 'package:movie_c17_me/core/resources/image&icon.dart';
+import 'package:movie_c17_me/features/home/presentation/bloc/home_bloc.dart';
+import 'package:movie_c17_me/features/home/presentation/bloc/home_state.dart';
+import 'package:movie_c17_me/features/home/presentation/widget/courser_scroll.dart';
 
 class NewMoviesItem extends StatelessWidget {
   const NewMoviesItem({super.key});
@@ -17,7 +15,7 @@ class NewMoviesItem extends StatelessWidget {
         builder: (context, state){
           var latestMovies = state.latestMoviesResponse?.data?.movies ?? [];
       return AnimatedContainer(
-          duration: const Duration(milliseconds: 500), // تأثير ناعم عند التغيير
+          duration: const Duration(milliseconds: 500),
           height: 600,
           width: double.infinity,
           decoration: BoxDecoration(
