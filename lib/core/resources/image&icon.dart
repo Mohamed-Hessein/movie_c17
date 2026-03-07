@@ -30,5 +30,6 @@ class ImageApp {
   static String emptyList = "${PathImageAndIconApp.pathImage}/empty_search_list.png";
   static String byDetails = "${PathImageAndIconApp.pathImage}/byDetails.jpg";
   static String byProfile = "${PathImageAndIconApp.pathImage}/gamer.png";
+ 
 
 }
