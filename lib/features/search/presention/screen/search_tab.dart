@@ -88,7 +88,7 @@ class SearchTab extends StatelessWidget {
                       physics: NeverScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        childAspectRatio: 16 / 9,
+                        childAspectRatio: 2 / 3,
                         mainAxisSpacing: 37.h,
                         crossAxisSpacing: 37.w,
                       ),
@@ -101,7 +101,7 @@ class SearchTab extends StatelessWidget {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(16.r),
                               child: CachedNetworkImage(
-                                imageUrl: searchList.largeCoverImage ??'',
+                                imageUrl: searchList. largeCoverImage??'',
                                 placeholder: (context, url) => CircularProgressIndicator(),
                                 errorWidget: (context, url, error) => Icon(Icons.error),
                               ),
