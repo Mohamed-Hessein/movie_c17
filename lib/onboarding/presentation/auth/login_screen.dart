@@ -76,7 +76,9 @@ class _LoginScreenState extends State<LoginScreen> {
               /// Login Button
               _buildButton(
                 text: 'Login',
-                onPressed: () {},
+                onPressed: () {
+                  context.router.push( HomeRoute());
+                },
               ),
 
               SizedBox(height: 20),

@@ -5,6 +5,8 @@ import 'package:movie/core/resources/colors_app.dart';
 import 'package:movie/core/resources/image&icon.dart';
 import 'package:movie/core/resources/style_app.dart';
 
+import '../../../core/resources/auto_route.dart';
+
 @RoutePage()
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -29,7 +31,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
         title: Text(
           'Register',
-          style: StyleApp.mdText.copyWith(color: ColorsApp.secondaryGold),
+          style: StyleApp.mdText.copyWith(color: ColorsApp.secondaryGold
+              ,fontSize: 18,
+              fontWeight: FontWeight.w400
+          ),
         ),
         centerTitle: true,
       ),
@@ -69,7 +74,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               _buildTextField(hintText: 'Phone Number', iconPath: ImageApp.icPhone),
               SizedBox(height: 20),
               // Create Account Button
-              _buildButton(text: 'Create Account', onPressed: () {}),
+              _buildButton(text: 'Create Account', onPressed: () {
+                context.router.push(const LoginRoute());
+              }),
               SizedBox(height: 15),
               // Login Link
               Row(
