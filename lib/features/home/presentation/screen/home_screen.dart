@@ -9,7 +9,7 @@ import 'package:movie_c17_me/features/home/presentation/bloc/home_event.dart';
 import 'package:movie_c17_me/features/home/presentation/bloc/home_state.dart';
 import 'package:movie_c17_me/features/browser/persentation/screen/explore_tab.dart';
 import 'package:movie_c17_me/features/home/presentation/screen/tabs/home_tab.dart';
-import 'package:movie_c17_me/features/home/presentation/screen/tabs/profile_tab.dart';
+import 'package:movie_c17_me/features/profile/presentation/screen/profile_tab.dart';
 import 'package:movie_c17_me/features/search/presention/screen/search_tab.dart';
 import 'package:movie_c17_me/features/home/presentation/widget/bottom_nav_bar.dart';
 @RoutePage()

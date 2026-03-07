@@ -18,5 +18,10 @@ class StyleApp {
       fontSize: 24.sp,
       fontWeight: FontWeight.w700,
       color: ColorsApp.textPrimary
+  );static TextStyle profileText = GoogleFonts.poppins(
+      fontSize: 36.sp,
+      fontWeight: FontWeight.w700,
+      color: ColorsApp.textPrimary
   );
+
 }

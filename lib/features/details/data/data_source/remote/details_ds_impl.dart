@@ -10,13 +10,13 @@ class DetailsDsImpl implements DetailsDs {
   @override
   Future<detailsOfMovie> getDetails(id) async{
     // TODO: implement getDetails
-try{
-  var response =  await apiManager.get(EndPoint.detailsOfMovie,queryParameters: {'movie_id': id});
+    try{
+      var response =  await apiManager.get(EndPoint.detailsOfMovie,queryParameters: {'movie_id': id});
 
-  detailsOfMovie data = detailsOfMovie.fromJson(response.data);
-  return data;
-}catch(e){
-  rethrow;
-}
+      detailsOfMovie data = detailsOfMovie.fromJson(response.data);
+      return data;
+    }catch(e){
+      rethrow;
+    }
   }
 }
