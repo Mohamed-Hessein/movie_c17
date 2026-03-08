@@ -37,6 +37,8 @@ import 'features/home/data/repo/movies_repo_impl.dart' as _i558;
 import 'features/home/domain/repo/move_repo.dart' as _i1064;
 import 'features/home/domain/usecase/movies_use_case.dart' as _i1064;
 import 'features/home/presentation/bloc/home_bloc.dart' as _i123;
+import 'features/profile/data/data_sourc/remote/fav_ds.dart' as _i74;
+import 'features/profile/data/data_sourc/remote/fav_ds_impl.dart' as _i540;
 import 'features/profile/data/data_sourc/remote/firebase_history_ds.dart'
     as _i176;
 import 'features/profile/data/data_sourc/remote/firebase_history_ds_impl.dart'
@@ -44,14 +46,23 @@ import 'features/profile/data/data_sourc/remote/firebase_history_ds_impl.dart'
 import 'features/profile/data/data_sourc/remote/get_history_ds.dart' as _i224;
 import 'features/profile/data/data_sourc/remote/get_history_ds_ipm.dart'
     as _i81;
+import 'features/profile/data/data_sourc/remote/set_fav_ds.dart' as _i733;
+import 'features/profile/data/data_sourc/remote/set_fav_ds_impl.dart' as _i832;
+import 'features/profile/data/data_sourc/repo/fav_repo_impl.dart' as _i452;
 import 'features/profile/data/data_sourc/repo/get_history_repo_impl.dart'
     as _i620;
 import 'features/profile/data/data_sourc/repo/save_history_repo_impl.dart'
     as _i632;
+import 'features/profile/data/data_sourc/repo/set_fav_repo_impl.dart' as _i542;
+import 'features/profile/domain/repo/favorite_repo.dart' as _i455;
 import 'features/profile/domain/repo/get_history_repo.dart' as _i71;
 import 'features/profile/domain/repo/history_rep.dart' as _i24;
+import 'features/profile/domain/repo/set_fav_repo.dart' as _i229;
+import 'features/profile/domain/usecase/fav_usecase.dart' as _i331;
 import 'features/profile/domain/usecase/get_history_usecase.dart' as _i448;
 import 'features/profile/domain/usecase/history_usecase.dart' as _i383;
+import 'features/profile/domain/usecase/set_fav_usecase.dart' as _i1057;
+import 'features/profile/presentation/bloc/fav_bloc.dart' as _i814;
 import 'features/profile/presentation/bloc/history_bloc.dart' as _i750;
 import 'features/search/data/data_source/search_ds_impl.dart' as _i234;
 import 'features/search/data/data_source/serach_ds.dart' as _i561;
@@ -68,6 +79,8 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.lazySingleton<_i237.ApiManager>(() => _i237.ApiManager());
+    gh.factory<_i733.SetFavDs>(() => _i832.SetFavDsImpl());
+    gh.factory<_i74.FavDs>(() => _i540.FavDsImpl());
     gh.lazySingleton<_i176.FirebaseHistoryDs>(
       () => _i359.FirebaseHistoryDsImpl(),
     );
@@ -101,6 +114,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i383.HistoryUsecase>(
       () => _i383.HistoryUsecase(gh<_i24.HistoryRep>()),
     );
+    gh.factory<_i455.FavoriteRepo>(() => _i452.FavRepoImpl(gh<_i74.FavDs>()));
     gh.factory<_i1064.MoviesRepo>(
       () => _i558.MoviesRepoImpl(gh<_i950.MoviesRemoteDs>()),
     );
@@ -109,6 +123,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i71.GetHistoryRepo>(
       () => _i620.GetHistoryRepoImpl(gh<_i224.GetHistoryDs>()),
+    );
+    gh.factory<_i229.SetFavRepo>(
+      () => _i542.SetFavRepoImpl(gh<_i733.SetFavDs>()),
     );
     gh.factory<_i703.BrowserRepo>(
       () => _i853.BrowsrRepoImpl(gh<_i369.BrowserDs>()),
@@ -125,11 +142,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1064.MoviesUseCase>(
       () => _i1064.MoviesUseCase(gh<_i1064.MoviesRepo>()),
     );
-    gh.factory<_i1043.DetailsBloc>(
-      () => _i1043.DetailsBloc(
-        gh<_i583.DetailsUseCase>(),
-        gh<_i580.SuggestionUsercase>(),
-      ),
+    gh.factory<_i331.FavUsecase>(
+      () => _i331.FavUsecase(gh<_i455.FavoriteRepo>()),
+    );
+    gh.factory<_i1057.SetFavUsecase>(
+      () => _i1057.SetFavUsecase(gh<_i229.SetFavRepo>()),
     );
     gh.factory<_i123.HomeBloc>(
       () => _i123.HomeBloc(gh<_i1064.MoviesUseCase>()),
@@ -142,6 +159,20 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i1044.SearchUsecase>(
       () => _i1044.SearchUsecase(gh<_i623.SearchRepo>()),
+    );
+    gh.factory<_i814.FavBloc>(
+      () => _i814.FavBloc(
+        gh<_i1057.SetFavUsecase>(),
+        gh<_i583.DetailsUseCase>(),
+        gh<_i331.FavUsecase>(),
+      ),
+    );
+    gh.factory<_i1043.DetailsBloc>(
+      () => _i1043.DetailsBloc(
+        gh<_i583.DetailsUseCase>(),
+        gh<_i580.SuggestionUsercase>(),
+        gh<_i1057.SetFavUsecase>(),
+      ),
     );
     gh.factory<_i750.HistoryBloc>(
       () => _i750.HistoryBloc(

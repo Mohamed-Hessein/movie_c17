@@ -9,11 +9,11 @@ class FirebaseHistoryDsImpl implements FirebaseHistoryDs {
   @override
   Future<void> SaveHistroy(id)async {
     var collec = creatClollection();
-  var ref = collec.doc();
+  var ref = collec.doc(id.toString());
 
   var model = LastSeenMovie(
     id: ref.id,
-    ids: id,
+    ids: id.toString(),
   );
 
   await ref.set(model);
