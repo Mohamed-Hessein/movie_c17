@@ -42,6 +42,8 @@ class ImageApp {
   static String icLock = "${PathImageAndIconApp.pathImage}/lockpass.png";
   static String icName = "${PathImageAndIconApp.pathImage}/name.png";
   static String icPhone = "${PathImageAndIconApp.pathImage}/phone.png";
+  static String icgoogle = "${PathImageAndIconApp.pathImage}/icon_google.png";
+
   static String icAvatar = "${PathImageAndIconApp.pathImage}/logo_avatar.png";
   static String Avatar = "${PathImageAndIconApp.pathImage}/logo_avatar2.png";
   static String Avatarr = "${PathImageAndIconApp.pathImage}/logo_avatar3.png";

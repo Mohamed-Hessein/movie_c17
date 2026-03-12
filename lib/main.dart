@@ -1,19 +1,26 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_c17_me/di.dart';
 import 'package:movie_c17_me/features/home/presentation/screen/home_screen.dart';
-
 import 'core/resources/auto_route.dart';
 import 'firebase_options.dart';
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   configureDependencies();
-  runApp( MyApp());
+  runApp( EasyLocalization(
+
+      supportedLocales: [Locale('en'), Locale('ar')],
+      path: 'assets/translations',
+      fallbackLocale: Locale('en'),
+      child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -27,6 +34,9 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
       builder: (context,child){
           return MaterialApp.router(
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
             debugShowCheckedModeBanner: false,
             routerConfig: _appRouter.config(),
           );

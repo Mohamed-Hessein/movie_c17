@@ -66,7 +66,7 @@ class MovieDetailsScreen extends StatelessWidget {
                   extendBodyBehindAppBar: true,
                   appBar: AppBar(
                     backgroundColor: Colors.transparent,
-                    automaticallyImplyActions: false,
+
                     leadingWidth: 50,
                     automaticallyImplyLeading: false,
                     title: GestureDetector(onTap: (){context.pop();},
