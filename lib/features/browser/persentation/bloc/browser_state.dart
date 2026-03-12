@@ -2,6 +2,7 @@ import 'package:movie_c17_me/features/details/data/model/details_model.dart';
 import 'package:movie_c17_me/features/details/data/model/suggestion_model.dart' hide Movies;
 import 'package:movie_c17_me/features/home/data/model/MoviseResponse.dart' hide Movies;
 
+import '../../../details/data/model/suggestion_model.dart' hide Movies;
 import '../../../search/data/model/search_model.dart';
 
 enum RequestStatus{
