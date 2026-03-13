@@ -30,32 +30,32 @@ class _LoginScreenState extends State<LoginScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-            
+
                 SizedBox(height: 30),
-            
+
                 /// Logo
                 Image.asset(
                   ImageApp.logostart,
                   height: 120,
                 ),
-            
+
                 SizedBox(height: 60),
-            
+
                 /// Email
                 _buildTextField(
                   hintText: 'Email',
                   iconPath: ImageApp.icEmail,
                 ),
-            
+
                 SizedBox(height: 25),
-            
+
                 /// Password
                 _buildTextField(
                   hintText: 'Password',
                   iconPath: ImageApp.icLock,
                   isPassword: true,
                 ),
-            
+
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
@@ -72,9 +72,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-            
+
                 SizedBox(height: 20),
-            
+
                 /// Login Button
                 _buildButton(
                   text: 'Login',
@@ -82,9 +82,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     context.router.push( HomeRoute());
                   },
                 ),
-            
+
                 SizedBox(height: 20),
-            
+
                 /// Create Account
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -108,9 +108,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
-            
+
                 SizedBox(height: 30),
-            
+
                 /// OR
                 Row(
                   children: [
@@ -120,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         thickness: 1,
                         indent: 80,
                         endIndent: 4,
-            
+
                       ),
                     ),
                     Text(
@@ -140,9 +140,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
-            
+
                 SizedBox(height: 20.h),
-            
+
                 /// Google Button
                 _buildButton(
                   text: 'Login With Google',
@@ -150,10 +150,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   isGoogle: true,
                 ),
                 SizedBox(height: 40),
-            
-            
-            
-            
+
+
+
+
                 /// Language Toggle
                 GestureDetector(
                   onTap: () {
@@ -198,7 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-            
+
                 SizedBox(height: 20.h),
               ],
             ),

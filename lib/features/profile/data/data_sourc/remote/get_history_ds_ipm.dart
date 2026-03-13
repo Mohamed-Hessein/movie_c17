@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_c17_me/features/profile/data/data_sourc/model/history_model.dart';
 import 'package:movie_c17_me/features/profile/data/data_sourc/remote/firebase_history_ds.dart';
@@ -15,7 +16,7 @@ class GetHistoryDsIpm   implements GetHistoryDs{
   @override
   Stream<QuerySnapshot<LastSeenMovie>> getHsitory() {
 var data;
-data =FirebaseHistoryDsImpl.creatClollection().snapshots();
+data =FirebaseHistoryDsImpl.creatClollection().where('id', isEqualTo: FirebaseAuth.instance.currentUser!.uid).snapshots();
 return data;
   }
 }

@@ -7,11 +7,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/resources/colors_app.dart';
 import '../../../../core/resources/image&icon.dart';
+import '../../../details/data/model/details_model.dart';
+import '../../data/data_sourc/model/history_model.dart';
 import '../bloc/history_bloc.dart';
 import '../bloc/hsitory_state.dart';
 
 class GridViewFilms extends StatelessWidget {
-  const GridViewFilms({super.key});
+   GridViewFilms({super.key,});
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +28,12 @@ class GridViewFilms extends StatelessWidget {
         print('erorrrrrrrr?${state.errorMassage.toString()}');
         return  SizedBox(
         child: GridView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+
+            physics: BouncingScrollPhysics(),
             gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 2/3,mainAxisSpacing: 10,crossAxisSpacing: 10) ,itemCount:state.lastSeenMovie?.length, itemBuilder: (context, index){
 
 var bloc = state.lastSeenMovie?[index];
+
 return Stack(
             children: [
               ClipRRect(

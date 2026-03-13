@@ -1,6 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import '../../features/edit_profile/presetation/screen/edit_profile_screen.dart';
 import '../../features/home/data/model/MoviseResponse.dart' show Movies;
+import '../../features/home/presentation/screen/check_user_screen.dart';
+import '../../features/profile/data/data_sourc/model/user_model.dart';
 import '../../onboarding/presentation/auth/forget_password_screen.dart';
 import '../../onboarding/presentation/auth/login_screen.dart';
 import '../../onboarding/presentation/auth/register_screen.dart';
@@ -17,7 +21,9 @@ class AppRouter extends RootStackRouter {
 
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(page: OnboardingRoute.page, initial: true),
+    AutoRoute(page: StartRoute.page, initial: true),
+    AutoRoute(page: OnboardingRoute.page),
+    AutoRoute(page: ProfileRoute.page),
     AutoRoute(page: LoginRoute.page),
     AutoRoute(page: RegisterRoute.page),
     AutoRoute(page: ForgetPasswordRoute.page),

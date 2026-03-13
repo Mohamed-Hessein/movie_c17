@@ -16,4 +16,13 @@ try{
   rethrow;
 }
   }
+
+  @override
+  Future<void> updateFav(LastSeenMovie movie)async {
+  try{
+ await   favDs.updateFav(movie);
+  }catch(e){
+    rethrow;
+  }
+  }
 }

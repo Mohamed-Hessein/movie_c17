@@ -150,6 +150,53 @@ class OnboardingRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ProfileScreen]
+class ProfileRoute extends PageRouteInfo<ProfileRouteArgs> {
+  ProfileRoute({
+    Key? key,
+    required UserModel user,
+    List<PageRouteInfo>? children,
+  }) : super(
+         ProfileRoute.name,
+         args: ProfileRouteArgs(key: key, user: user),
+         initialChildren: children,
+       );
+
+  static const String name = 'ProfileRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<ProfileRouteArgs>();
+      return ProfileScreen(key: args.key, user: args.user);
+    },
+  );
+}
+
+class ProfileRouteArgs {
+  const ProfileRouteArgs({this.key, required this.user});
+
+  final Key? key;
+
+  final UserModel user;
+
+  @override
+  String toString() {
+    return 'ProfileRouteArgs{key: $key, user: $user}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! ProfileRouteArgs) return false;
+    return key == other.key && user == other.user;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ user.hashCode;
+}
+
+/// generated route for
 /// [RegisterScreen]
 class RegisterRoute extends PageRouteInfo<void> {
   const RegisterRoute({List<PageRouteInfo>? children})
@@ -161,6 +208,22 @@ class RegisterRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const RegisterScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [StartScreen]
+class StartRoute extends PageRouteInfo<void> {
+  const StartRoute({List<PageRouteInfo>? children})
+    : super(StartRoute.name, initialChildren: children);
+
+  static const String name = 'StartRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const StartScreen();
     },
   );
 }

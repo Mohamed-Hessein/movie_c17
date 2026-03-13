@@ -5,4 +5,5 @@ import '../model/history_model.dart';
 
 abstract class FavDs {
    Stream<QuerySnapshot<LastSeenMovie>> getFav(bool isfav);
+   Future<void> updateFav(LastSeenMovie movie);
 }
