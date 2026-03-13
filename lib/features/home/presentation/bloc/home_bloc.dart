@@ -9,14 +9,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   MoviesUseCase moviesUseCase;
   HomeBloc(this.moviesUseCase) : super(HomeState()){
     on<ChangeSelectedBottomNavBar>((event, emit) {
-      emit(HomeState(currentIndex: event.index));
+      emit(state.copyWith(  currentIndex: event.index));
     });
     on<ChangeBackgroundEvent>((event, emit) {
       emit(state.copyWith(currentBackground: event.imageUrl));
     });
     on<GetMovies>((event, emit) async {
 
-      emit(HomeState(getMoviesStatus: RequestStatus.loading));
+      emit(state.copyWith(getMoviesStatus: RequestStatus.loading));
 
       try {
            final results = await Future.wait([
@@ -27,18 +27,18 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         final latestResponse = results[0];
         final popularResponse = results[1];
 
-        emit(HomeState(
-          getMoviesStatus: RequestStatus.success,
-          latestMoviesResponse: latestResponse,
-          popularMoviesResponse: popularResponse,
-        ));
+        emit(
+          state.copyWith(  getMoviesStatus: RequestStatus.success,
+            latestMoviesResponse: latestResponse,
+            popularMoviesResponse: popularResponse,)
+        );
 
       } catch (e) {
 
-        emit(HomeState(
-          getMoviesStatus: RequestStatus.error,
-          errorMassage: e.toString(),
-        ));
+        emit(
+          state.copyWith(     getMoviesStatus: RequestStatus.error,
+            errorMassage: e.toString(),)
+        );
       }
     });
 

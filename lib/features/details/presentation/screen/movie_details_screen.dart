@@ -53,7 +53,7 @@ class MovieDetailsScreen extends StatelessWidget {
 
             }
 
-            final movie = state.detailsOfMovies?.data?.movie;
+            final movie = state.detailsOfMovies?.data?.movie ;
             final suggest= state.suggestions;
             if(suggest ==null){
               return SizedBox();
@@ -77,7 +77,7 @@ class MovieDetailsScreen extends StatelessWidget {
                     actions: [GestureDetector(
                         onTap: (){
 
-context.read<DetailsBloc>().add(AddToFav(movie.id));
+                          context.read<DetailsBloc>().add(AddToFav(movie.id.toString()));
                         },
                         child: ImageIcon(AssetImage(IconApp.saveIc),color: Colors.white,)),SizedBox(width: 15,)],),
                   body: SingleChildScrollView(child: Column(
@@ -107,7 +107,7 @@ context.read<DetailsBloc>().add(AddToFav(movie.id));
                               right: 16,
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Text(textAlign: TextAlign.center,movie.dateUploaded!.substring(0,4)??'',style: StyleApp.lgText,),
+                                child: Text(textAlign: TextAlign.center,movie.dateUploaded?.substring(0,4)??'',style: StyleApp.lgText,),
                               )),
                         ],
                       ),

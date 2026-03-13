@@ -9,11 +9,14 @@ import 'package:movie_c17_me/features/profile/presentation/bloc/fav_state.dart' 
 
 import '../../../../core/resources/colors_app.dart';
 import '../../../../core/resources/image&icon.dart';
+import '../../../details/data/model/details_model.dart';
+import '../../data/data_sourc/model/history_model.dart';
 import '../bloc/history_bloc.dart';
 import '../bloc/hsitory_state.dart';
 
 class FavGrid extends StatelessWidget {
-  const FavGrid({super.key});
+   FavGrid({super.key,});
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +30,11 @@ class FavGrid extends StatelessWidget {
         print('erorrrrrrrr?${state.errorMassage.toString()}');
         return  SizedBox(
           child: GridView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 2/3,mainAxisSpacing: 10,crossAxisSpacing: 10) ,itemCount:context.read<FavBloc>().movies.length, itemBuilder: (context, index){
+              physics: BouncingScrollPhysics(),
+              gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 2/3,mainAxisSpacing: 10,crossAxisSpacing: 10) ,itemCount: state.lastSeenMovie?.length??0, itemBuilder: (context, index){
 
-            var bloc = context.read<FavBloc>().movies[index];
+            var bloc = state.lastSeenMovie![index];
+
             return Stack(
               children: [
                 ClipRRect(
@@ -82,4 +85,5 @@ class FavGrid extends StatelessWidget {
 
     );
   }
+
 }
