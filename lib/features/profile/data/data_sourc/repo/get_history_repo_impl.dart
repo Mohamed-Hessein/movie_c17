@@ -10,6 +10,10 @@ class GetHistoryRepoImpl implements GetHistoryRepo {
 
   @override
   Stream<QuerySnapshot<LastSeenMovie>> getHistory() {
-  return getHistoryDs.getHsitory();
+  try{
+    return getHistoryDs.getHsitory();
+  }catch(e){
+    rethrow;
+  }
   }
 }

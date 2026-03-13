@@ -30,6 +30,14 @@ class ImageApp {
   static String emptyList = "${PathImageAndIconApp.pathImage}/empty_search_list.png";
   static String byDetails = "${PathImageAndIconApp.pathImage}/byDetails.jpg";
   static String byProfile = "${PathImageAndIconApp.pathImage}/gamer.png";
+  static String byProfile2 = "${PathImageAndIconApp.pathImage}/women.png";
+  static String byProfile3 = "${PathImageAndIconApp.pathImage}/women2.png";
+  static String byProfile4 = "${PathImageAndIconApp.pathImage}/women_gamr.png";
+  static String byProfile5 = "${PathImageAndIconApp.pathImage}/women_with_red_hair.png";
+  static String byProfile6 = "${PathImageAndIconApp.pathImage}/man.png";
+  static String byProfile7 = "${PathImageAndIconApp.pathImage}/man2.png";
+  static String byProfile8 = "${PathImageAndIconApp.pathImage}/ear_pods.png";
+  static String byProfile9 = "${PathImageAndIconApp.pathImage}/boy.png";
 
   static String onboardingfav = "${PathImageAndIconApp.pathImage}/onboardingfav.png";
   static String onboardingexplore = "${PathImageAndIconApp.pathImage}/onboardingexplore.png";

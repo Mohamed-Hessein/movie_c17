@@ -12,6 +12,8 @@ import 'package:movie_c17_me/features/details/data/model/details_model.dart';
 import 'package:movie_c17_me/features/details/presentation/Bloc/details_bloc.dart';
 import 'package:movie_c17_me/features/details/presentation/Bloc/details_events.dart';
 import 'package:movie_c17_me/features/details/presentation/Bloc/details_state.dart';
+import 'package:movie_c17_me/features/profile/presentation/bloc/fav_bloc.dart';
+import 'package:movie_c17_me/features/profile/presentation/bloc/fav_event.dart' hide AddToFav;
 
 import '../../../../core/resources/image&icon.dart';
 import '../../../../core/resources/style_app.dart';
@@ -45,12 +47,13 @@ class MovieDetailsScreen extends StatelessWidget {
             }
 
             if (state.getDetailsStatus == RequestStatus.error) {
+              print(state.errorMassage.toString());
               return
-                Center(child: Text("Something went wrong"));
+                Center(child: Text(state.errorMassage.toString()));
 
             }
 
-            final movie = state.detailsOfMovies?.data?.movie;
+            final movie = state.detailsOfMovies?.data?.movie ;
             final suggest= state.suggestions;
             if(suggest ==null){
               return SizedBox();
@@ -71,7 +74,12 @@ class MovieDetailsScreen extends StatelessWidget {
                     automaticallyImplyLeading: false,
                     title: GestureDetector(onTap: (){context.pop();},
                         child: ImageIcon(AssetImage(IconApp.arrowBack),color: Colors.white,size: 24,)),
-                    actions: [ImageIcon(AssetImage(IconApp.saveIc),color: Colors.white,),SizedBox(width: 15,)],),
+                    actions: [GestureDetector(
+                        onTap: (){
+
+                          context.read<DetailsBloc>().add(AddToFav(movie.id.toString()));
+                        },
+                        child: ImageIcon(AssetImage(IconApp.saveIc),color: Colors.white,)),SizedBox(width: 15,)],),
                   body: SingleChildScrollView(child: Column(
 
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -99,14 +107,17 @@ class MovieDetailsScreen extends StatelessWidget {
                               right: 16,
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Text(textAlign: TextAlign.center,movie.dateUploaded!.substring(0,4)??'',style: StyleApp.lgText,),
+                                child: Text(textAlign: TextAlign.center,movie.dateUploaded?.substring(0,4)??'',style: StyleApp.lgText,),
                               )),
                         ],
                       ),
                       CustomBtn(text: 'watch', onPressed: () {  },),
                       SizedBox(height: 15.h,),
-                      RowRating(star:movie.torrents?.first.seeds??'', time: movies.runtime?? '', fav: movies.rating,),
-
+                      RowRating(
+                        star: '${movie.torrents?.first.seeds ?? ''}',
+                        time: '${movies.runtime ?? ''}',
+                        fav: '${movies.rating ?? ''}',
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(AppString.subTitleDetailsScreenShots,style: StyleApp.lgText,),

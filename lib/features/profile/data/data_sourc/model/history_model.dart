@@ -1,22 +1,23 @@
 class LastSeenMovie {
-   dynamic id;
-   String ids;
+  String id;
+  String ids;
+  bool isfav;
 
-  LastSeenMovie({required this.id,required this.ids});
-
+  LastSeenMovie({required this.id, required this.ids, this.isfav = false});
 
   factory LastSeenMovie.fromJson(Map<String, dynamic> json) {
     return LastSeenMovie(
-      id: json['id'] as int,
-      ids:   json['ids'] as String,
+      id: json['id'].toString(),
+      ids: json['ids'].toString(),
+      isfav: json['isfav'] ?? false,
     );
   }
-
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'ids' :ids,
+      'ids': ids,
+      'isfav': isfav,
     };
   }
 }

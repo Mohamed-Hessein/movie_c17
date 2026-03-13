@@ -18,7 +18,9 @@ class HistoryBloc  extends Bloc<HistoryEvent, HsitoryState>{
   DetailsUseCase detailsUseCase;
 
   HistoryBloc(this.historyUsecase,this.getHistoryUsecase, this.detailsUseCase) : super(HsitoryState()){
-    on<HistorySave>((event, emit) async{
+
+
+    _subscribeToFavStream(); on<HistorySave>((event, emit) async{
   try{
     emit(state.copyWith(getMoviesStatus:  RequestStatus.loading));
     var history = await historyUsecase.call(event.id);
@@ -39,7 +41,7 @@ class HistoryBloc  extends Bloc<HistoryEvent, HsitoryState>{
         List<detailsOfMovie> film = await Future.wait(
             history.docs.map((e) async {
               var movieFromHome = await detailsUseCase.call(e.data().ids);
-              print('l;;epg46i[ui65 ${e.data().ids}');
+              print('l;;epg46i[ui65 ${e.data().id}');
 
               return detailsOfMovie(
                 data: Data(
@@ -68,4 +70,19 @@ class HistoryBloc  extends Bloc<HistoryEvent, HsitoryState>{
     });
 
   }
-}
+ void _subscribeToFavStream() {
+   getHistoryUsecase.call().listen((snapshot) async {
+    List<detailsOfMovie> movies = [];
+    for (var doc in snapshot.docs) {
+      final lastSeen = doc.data();
+      final details = await detailsUseCase.call(lastSeen.ids);
+      if(details != null) movies.add(details);
+    }
+
+    emit(state.copyWith(
+      lastSeenMovie: movies,
+      getMoviesStatus: RequestStatus.success,
+    ));
+  });
+
+}}

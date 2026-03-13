@@ -8,3 +8,7 @@ class getSuggest extends DetailsEvents{
   dynamic id;
   getSuggest(this.id);
 }
+class AddToFav extends DetailsEvents{
+  dynamic id;
+  AddToFav(this.id);
+}
