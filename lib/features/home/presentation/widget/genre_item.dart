@@ -52,7 +52,7 @@ class ActionItem extends StatelessWidget {
               final movie = movies[index];
               return GestureDetector(
                 onTap: (){
-                  context.pushRoute(const MovieDetailsRoute());
+                  context.pushRoute( MovieDetailsRoute(movies: movie),);
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.37,

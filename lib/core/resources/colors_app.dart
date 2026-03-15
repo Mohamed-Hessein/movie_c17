@@ -3,6 +3,7 @@ class ColorsApp {
   // Backgrounds
   static const Color background = Color(0xFF121312);
   static const Color surface = Color(0xFF121212);
+  static const Color sceondry = Color(0xFF282A28);
 
   //transparent
   static const Color transparent = Color(0x00000000);
@@ -10,7 +11,7 @@ class ColorsApp {
   // Accents
   static const Color primaryGold = Color(0xFFFFD700);
   static const Color secondaryGold = Color(0xFFFFC107);
-
+static const Color textGlod = Color(0xFFF6BD00);
   // Text
   static const Color textPrimary = Color(0xFFFFFFFF);
   static const Color textSecondary = Color(0xFFE0E0E0);

@@ -1,0 +1,18 @@
+{
+  "loginTitle1": "Email",
+  "loginTitle2": "Password",
+  "loginTitle3": "Forget Password?",
+  "loginTitle4": "Login",
+  "loginTitle5": "Don't have an account? ",
+  "loginTitle6": "Create Account",
+  "loginTitle7": "OR",
+  "loginTitle8": "Continue with Google",
+  "screenRegister1": "Create Account",
+  "screenRegister2": "Choose your avatar",
+  "screenRegister3": "Full Name",
+  "screenRegister4": "Confirm Password",
+  "screenRegister5": "Phone Number",
+  "screenRegister6": "Sign Up",
+  "screenRegister7": "Already have an account? ",
+  "screenRegister8": "Login"
+}

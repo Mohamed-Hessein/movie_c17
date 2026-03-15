@@ -20,21 +20,26 @@ class HomeState {
     this.latestMoviesResponse,
     this.popularMoviesResponse,
     this.moviesResponse,
+
     this.errorMassage,
     this.currentBackground,
     this.currentIndex = 0});
 
-  HomeState copyWith({
+  HomeState copyWith({ int? currentIndex,
+
     RequestStatus? getMoviesStatus,
     MoviesResponse? moviesResponse,
-    String? errorMassage,
+    String? errorMassage,  MoviesResponse? latestMoviesResponse,
+    MoviesResponse? popularMoviesResponse,
+
     String? currentBackground,}){
     return HomeState(
+      currentIndex: currentIndex ?? this.currentIndex,
       getMoviesStatus: getMoviesStatus ?? this.getMoviesStatus,
       moviesResponse: moviesResponse ?? this.moviesResponse,
       errorMassage: errorMassage ?? this.errorMassage,
-      latestMoviesResponse: latestMoviesResponse ?? latestMoviesResponse,
-      popularMoviesResponse: popularMoviesResponse ?? popularMoviesResponse,
+      latestMoviesResponse: latestMoviesResponse ?? this.latestMoviesResponse,
+      popularMoviesResponse: popularMoviesResponse ?? this.popularMoviesResponse,
       currentBackground: currentBackground ?? this.currentBackground,
     );
   }

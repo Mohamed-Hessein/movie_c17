@@ -7,10 +7,10 @@ import 'package:movie_c17_me/di.dart';
 import 'package:movie_c17_me/features/home/presentation/bloc/home_bloc.dart';
 import 'package:movie_c17_me/features/home/presentation/bloc/home_event.dart';
 import 'package:movie_c17_me/features/home/presentation/bloc/home_state.dart';
-import 'package:movie_c17_me/features/home/presentation/screen/tabs/explore_tab.dart';
+import 'package:movie_c17_me/features/browser/persentation/screen/explore_tab.dart';
 import 'package:movie_c17_me/features/home/presentation/screen/tabs/home_tab.dart';
-import 'package:movie_c17_me/features/home/presentation/screen/tabs/profile_tab.dart';
-import 'package:movie_c17_me/features/home/presentation/screen/tabs/search_tab.dart';
+import 'package:movie_c17_me/features/profile/presentation/screen/profile_tab.dart';
+import 'package:movie_c17_me/features/search/presention/screen/search_tab.dart';
 import 'package:movie_c17_me/features/home/presentation/widget/bottom_nav_bar.dart';
 @RoutePage()
 class HomeScreen extends StatelessWidget {
@@ -20,39 +20,42 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<HomeBloc>()..add(GetMovies()),
-      child: Scaffold(
-        extendBody: true,
-        backgroundColor: ColorsApp.background,
-        body: BlocBuilder<HomeBloc, HomeState>(
-            builder: (context, state) {
-              return Stack(
-                children: [
-                  IndexedStack(
-                    index: state.currentIndex,
-                    children: [
-                      HomeTab(),
-                      SearchTab(),
-                      ExploreTab(),
-                      ProfileTab(),
-                    ],
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    child: BottomNavBar(),
-                  ),
-                ],
-              );
-            }
-        ) ,
-        // bottomNavigationBar: Container(
-        //     height: 100,
-        //   decoration: BoxDecoration(
-        //      color: ColorsApp.surface,
-        //
-        //   ),
-        //     child: BottomNavBar()),
+      child: Directionality(
+        textDirection: TextDirection.ltr,
+        child: Scaffold(
+          extendBody: true,
+          backgroundColor: ColorsApp.background,
+          body: BlocBuilder<HomeBloc, HomeState>(
+              builder: (context, state) {
+                return Stack(
+                  children: [
+                    IndexedStack(
+                      index: state.currentIndex,
+                      children: [
+                        HomeTab(),
+                        SearchTab(),
+                        ExploreTab(),
+                        ProfileTab(),
+                      ],
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: BottomNavBar(),
+                    ),
+                  ],
+                );
+              }
+          ) ,
+          // bottomNavigationBar: Container(
+          //     height: 100,
+          //   decoration: BoxDecoration(
+          //      color: ColorsApp.surface,
+          //
+          //   ),
+          //     child: BottomNavBar()),
+        ),
       ),
     );
   }

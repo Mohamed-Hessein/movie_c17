@@ -5,7 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/resources/image&icon.dart';
 
 class ScreenShotList extends StatelessWidget {
-  const ScreenShotList({super.key});
+   ScreenShotList({super.key,required this.image});
+dynamic image;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class ScreenShotList extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index){
 
-            return   ClipRRect(borderRadius: BorderRadius.circular(16),child: Image.asset(ImageApp.byDetails,fit: BoxFit.cover,),);
+            return   ClipRRect(borderRadius: BorderRadius.circular(16),child: Image.network(image??'',fit: BoxFit.cover,),);
 
           }, separatorBuilder: (constext, index){return SizedBox(height: 15,);}, itemCount: 3),
     );

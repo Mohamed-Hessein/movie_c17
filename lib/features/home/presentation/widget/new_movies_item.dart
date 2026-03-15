@@ -15,7 +15,7 @@ class NewMoviesItem extends StatelessWidget {
         builder: (context, state){
           var latestMovies = state.latestMoviesResponse?.data?.movies ?? [];
       return AnimatedContainer(
-          duration: const Duration(milliseconds: 500), // تأثير ناعم عند التغيير
+          duration: const Duration(milliseconds: 500),
           height: 600,
           width: double.infinity,
           decoration: BoxDecoration(

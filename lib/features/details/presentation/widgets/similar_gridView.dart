@@ -1,12 +1,15 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_c17_me/features/details/data/model/suggestion_model.dart';
 
 import '../../../../core/resources/colors_app.dart';
 import '../../../../core/resources/image&icon.dart';
 
 class CusctomGridView extends StatelessWidget {
-  const CusctomGridView({super.key});
+   CusctomGridView({super.key,required this.suggest});
+   Suggestions suggest;
 
   @override
   Widget build(BuildContext context) {
@@ -14,16 +17,18 @@ class CusctomGridView extends StatelessWidget {
       child: GridView.builder(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
-          gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 2/3,mainAxisSpacing: 37,crossAxisSpacing: 37) ,itemCount:4, itemBuilder: (context, index){
+          gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 2/3,mainAxisSpacing: 10,crossAxisSpacing: 10) ,itemCount:suggest.data?.movies?.length, itemBuilder: (context, index){
 
 
         return Stack(
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(16),
-              child: Image.asset(
-                ImageApp.bgHome,
-                fit: BoxFit.cover,
+              child: CachedNetworkImage(
+
+                imageUrl:    suggest.data?.movies![index].mediumCoverImage ??'',
+                placeholder: (context, url) => CircularProgressIndicator(),
+                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
             ),
             Positioned(
@@ -39,7 +44,7 @@ class CusctomGridView extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      '4.5',
+                      '${suggest.data?.movies![index].rating}',
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                     SizedBox(width: 4),
