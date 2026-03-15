@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -79,7 +80,7 @@ class ProfileTab extends StatelessWidget {
                                   return Text('${state.lastSeenMovie?.length??0}',style: StyleApp.profileText,);
                                 },
                                 ),
-                                  Text('Wish List',style: StyleApp.mdText,)],),
+                                  Text('Watch List',style: StyleApp.mdText,)],),
 
 
                               ],
@@ -106,7 +107,8 @@ class ProfileTab extends StatelessWidget {
                                 child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(backgroundColor: Colors.red,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                                     onPressed: (){
-
+                                      context.read<UserBloc>().add(logOutEvent());
+context.pushRoute(LoginRoute());
                                     }, child: Center(child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [

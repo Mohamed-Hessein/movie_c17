@@ -1,7 +1,20 @@
+import 'package:hive/hive.dart';
+
+
+
+@HiveType(typeId: 20)
 class Suggestions {
+
+  @HiveField(0)
   String? status;
+
+  @HiveField(1)
   String? statusMessage;
+
+  @HiveField(2)
   Data? data;
+
+  @HiveField(3)
   Meta? meta;
 
   Suggestions({this.status, this.statusMessage, this.data, this.meta});
@@ -9,103 +22,167 @@ class Suggestions {
   Suggestions.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     statusMessage = json['status_message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
-    meta = json['@meta'] != null ? new Meta.fromJson(json['@meta']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    meta = json['@meta'] != null ? Meta.fromJson(json['@meta']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['status_message'] = this.statusMessage;
+    final Map<String, dynamic> data = {};
+    data['status'] = status;
+    data['status_message'] = statusMessage;
+
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
-    if (this.meta != null) {
-      data['@meta'] = this.meta!.toJson();
+
+    if (meta != null) {
+      data['@meta'] = meta!.toJson();
     }
+
     return data;
   }
 }
 
+@HiveType(typeId: 21)
 class Data {
+
+  @HiveField(0)
   int? movieCount;
+
+  @HiveField(1)
   List<Movies>? movies;
 
   Data({this.movieCount, this.movies});
 
   Data.fromJson(Map<String, dynamic> json) {
     movieCount = json['movie_count'];
+
     if (json['movies'] != null) {
       movies = <Movies>[];
       json['movies'].forEach((v) {
-        movies!.add(new Movies.fromJson(v));
+        movies!.add(Movies.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['movie_count'] = this.movieCount;
-    if (this.movies != null) {
-      data['movies'] = this.movies!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = {};
+
+    data['movie_count'] = movieCount;
+
+    if (movies != null) {
+      data['movies'] = movies!.map((v) => v.toJson()).toList();
     }
+
     return data;
   }
 }
 
+@HiveType(typeId: 22)
 class Movies {
+
+  @HiveField(0)
   int? id;
+
+  @HiveField(1)
   String? url;
+
+  @HiveField(2)
   String? imdbCode;
+
+  @HiveField(3)
   String? title;
+
+  @HiveField(4)
   String? titleEnglish;
+
+  @HiveField(5)
   String? titleLong;
+
+  @HiveField(6)
   String? slug;
+
+  @HiveField(7)
   int? year;
+
+  @HiveField(8)
   double? rating;
+
+  @HiveField(9)
   int? runtime;
+
+  @HiveField(10)
   List<String>? genres;
+
+  @HiveField(11)
   String? summary;
+
+  @HiveField(12)
   String? descriptionFull;
+
+  @HiveField(13)
   String? synopsis;
+
+  @HiveField(14)
   String? ytTrailerCode;
+
+  @HiveField(15)
   String? language;
+
+  @HiveField(16)
   String? mpaRating;
+
+  @HiveField(17)
   String? backgroundImage;
+
+  @HiveField(18)
   String? backgroundImageOriginal;
+
+  @HiveField(19)
   String? smallCoverImage;
+
+  @HiveField(20)
   String? mediumCoverImage;
+
+  @HiveField(21)
   String? state;
+
+  @HiveField(22)
   List<Torrents>? torrents;
+
+  @HiveField(23)
   String? dateUploaded;
+
+  @HiveField(24)
   int? dateUploadedUnix;
 
-  Movies(
-      {this.id,
-        this.url,
-        this.imdbCode,
-        this.title,
-        this.titleEnglish,
-        this.titleLong,
-        this.slug,
-        this.year,
-        this.rating,
-        this.runtime,
-        this.genres,
-        this.summary,
-        this.descriptionFull,
-        this.synopsis,
-        this.ytTrailerCode,
-        this.language,
-        this.mpaRating,
-        this.backgroundImage,
-        this.backgroundImageOriginal,
-        this.smallCoverImage,
-        this.mediumCoverImage,
-        this.state,
-        this.torrents,
-        this.dateUploaded,
-        this.dateUploadedUnix});
+  Movies({
+    this.id,
+    this.url,
+    this.imdbCode,
+    this.title,
+    this.titleEnglish,
+    this.titleLong,
+    this.slug,
+    this.year,
+    this.rating,
+    this.runtime,
+    this.genres,
+    this.summary,
+    this.descriptionFull,
+    this.synopsis,
+    this.ytTrailerCode,
+    this.language,
+    this.mpaRating,
+    this.backgroundImage,
+    this.backgroundImageOriginal,
+    this.smallCoverImage,
+    this.mediumCoverImage,
+    this.state,
+    this.torrents,
+    this.dateUploaded,
+    this.dateUploadedUnix
+  });
 
   Movies.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -116,9 +193,9 @@ class Movies {
     titleLong = json['title_long'];
     slug = json['slug'];
     year = json['year'];
-    rating = json['rating'];
+    rating = (json['rating'] as num?)?.toDouble();
     runtime = json['runtime'];
-    genres = json['genres'].cast<String>();
+    genres = json['genres']?.cast<String>();
     summary = json['summary'];
     descriptionFull = json['description_full'];
     synopsis = json['synopsis'];
@@ -130,84 +207,116 @@ class Movies {
     smallCoverImage = json['small_cover_image'];
     mediumCoverImage = json['medium_cover_image'];
     state = json['state'];
+    dateUploaded = json['date_uploaded'];
+    dateUploadedUnix = json['date_uploaded_unix'];
+
     if (json['torrents'] != null) {
       torrents = <Torrents>[];
       json['torrents'].forEach((v) {
-        torrents!.add(new Torrents.fromJson(v));
+        torrents!.add(Torrents.fromJson(v));
       });
     }
-    dateUploaded = json['date_uploaded'];
-    dateUploadedUnix = json['date_uploaded_unix'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['url'] = this.url;
-    data['imdb_code'] = this.imdbCode;
-    data['title'] = this.title;
-    data['title_english'] = this.titleEnglish;
-    data['title_long'] = this.titleLong;
-    data['slug'] = this.slug;
-    data['year'] = this.year;
-    data['rating'] = this.rating;
-    data['runtime'] = this.runtime;
-    data['genres'] = this.genres;
-    data['summary'] = this.summary;
-    data['description_full'] = this.descriptionFull;
-    data['synopsis'] = this.synopsis;
-    data['yt_trailer_code'] = this.ytTrailerCode;
-    data['language'] = this.language;
-    data['mpa_rating'] = this.mpaRating;
-    data['background_image'] = this.backgroundImage;
-    data['background_image_original'] = this.backgroundImageOriginal;
-    data['small_cover_image'] = this.smallCoverImage;
-    data['medium_cover_image'] = this.mediumCoverImage;
-    data['state'] = this.state;
-    if (this.torrents != null) {
-      data['torrents'] = this.torrents!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = {};
+
+    data['id'] = id;
+    data['url'] = url;
+    data['imdb_code'] = imdbCode;
+    data['title'] = title;
+    data['title_english'] = titleEnglish;
+    data['title_long'] = titleLong;
+    data['slug'] = slug;
+    data['year'] = year;
+    data['rating'] = rating;
+    data['runtime'] = runtime;
+    data['genres'] = genres;
+    data['summary'] = summary;
+    data['description_full'] = descriptionFull;
+    data['synopsis'] = synopsis;
+    data['yt_trailer_code'] = ytTrailerCode;
+    data['language'] = language;
+    data['mpa_rating'] = mpaRating;
+    data['background_image'] = backgroundImage;
+    data['background_image_original'] = backgroundImageOriginal;
+    data['small_cover_image'] = smallCoverImage;
+    data['medium_cover_image'] = mediumCoverImage;
+    data['state'] = state;
+    data['date_uploaded'] = dateUploaded;
+    data['date_uploaded_unix'] = dateUploadedUnix;
+
+    if (torrents != null) {
+      data['torrents'] = torrents!.map((v) => v.toJson()).toList();
     }
-    data['date_uploaded'] = this.dateUploaded;
-    data['date_uploaded_unix'] = this.dateUploadedUnix;
+
     return data;
   }
 }
 
+@HiveType(typeId: 23)
 class Torrents {
+
+  @HiveField(0)
   String? url;
+
+  @HiveField(1)
   String? hash;
+
+  @HiveField(2)
   String? quality;
+
+  @HiveField(3)
   String? isRepack;
+
+  @HiveField(4)
   String? videoCodec;
+
+  @HiveField(5)
   String? bitDepth;
+
+  @HiveField(6)
   String? audioChannels;
+
+  @HiveField(7)
   int? seeds;
+
+  @HiveField(8)
   int? peers;
+
+  @HiveField(9)
   String? size;
+
+  @HiveField(10)
   int? sizeBytes;
+
+  @HiveField(11)
   String? dateUploaded;
+
+  @HiveField(12)
   int? dateUploadedUnix;
 
-  Torrents(
-      {this.url,
-        this.hash,
-        this.quality,
-        this.isRepack,
-        this.videoCodec,
-        this.bitDepth,
-        this.audioChannels,
-        this.seeds,
-        this.peers,
-        this.size,
-        this.sizeBytes,
-        this.dateUploaded,
-        this.dateUploadedUnix});
+  Torrents({
+    this.url,
+    this.hash,
+    this.quality,
+    this.isRepack,
+    this.videoCodec,
+    this.bitDepth,
+    this.audioChannels,
+    this.seeds,
+    this.peers,
+    this.size,
+    this.sizeBytes,
+    this.dateUploaded,
+    this.dateUploadedUnix
+  });
 
   Torrents.fromJson(Map<String, dynamic> json) {
     url = json['url'];
     hash = json['hash'];
     quality = json['quality'];
-    isRepack = json['is_repack'];
+    isRepack = json['is_repack']?.toString();
     videoCodec = json['video_codec'];
     bitDepth = json['bit_depth'];
     audioChannels = json['audio_channels'];
@@ -220,54 +329,75 @@ class Torrents {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['url'] = this.url;
-    data['hash'] = this.hash;
-    data['quality'] = this.quality;
-    data['is_repack'] = this.isRepack;
-    data['video_codec'] = this.videoCodec;
-    data['bit_depth'] = this.bitDepth;
-    data['audio_channels'] = this.audioChannels;
-    data['seeds'] = this.seeds;
-    data['peers'] = this.peers;
-    data['size'] = this.size;
-    data['size_bytes'] = this.sizeBytes;
-    data['date_uploaded'] = this.dateUploaded;
-    data['date_uploaded_unix'] = this.dateUploadedUnix;
+    final Map<String, dynamic> data = {};
+
+    data['url'] = url;
+    data['hash'] = hash;
+    data['quality'] = quality;
+    data['is_repack'] = isRepack;
+    data['video_codec'] = videoCodec;
+    data['bit_depth'] = bitDepth;
+    data['audio_channels'] = audioChannels;
+    data['seeds'] = seeds;
+    data['peers'] = peers;
+    data['size'] = size;
+    data['size_bytes'] = sizeBytes;
+    data['date_uploaded'] = dateUploaded;
+    data['date_uploaded_unix'] = dateUploadedUnix;
+
     return data;
   }
 }
 
+@HiveType(typeId: 24)
 class Meta {
+
+  @HiveField(0)
   Migration? migration;
+
+  @HiveField(1)
   int? apiVersion;
+
+  @HiveField(2)
   String? executionTime;
 
   Meta({this.migration, this.apiVersion, this.executionTime});
 
   Meta.fromJson(Map<String, dynamic> json) {
     migration = json['migration'] != null
-        ? new Migration.fromJson(json['migration'])
+        ? Migration.fromJson(json['migration'])
         : null;
     apiVersion = json['api_version'];
     executionTime = json['execution_time'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.migration != null) {
-      data['migration'] = this.migration!.toJson();
+    final Map<String, dynamic> data = {};
+
+    if (migration != null) {
+      data['migration'] = migration!.toJson();
     }
-    data['api_version'] = this.apiVersion;
-    data['execution_time'] = this.executionTime;
+
+    data['api_version'] = apiVersion;
+    data['execution_time'] = executionTime;
+
     return data;
   }
 }
 
+@HiveType(typeId: 25)
 class Migration {
+
+  @HiveField(0)
   String? message;
+
+  @HiveField(1)
   String? oldBase;
+
+  @HiveField(2)
   String? newBase;
+
+  @HiveField(3)
   String? sunset;
 
   Migration({this.message, this.oldBase, this.newBase, this.sunset});
@@ -280,302 +410,13 @@ class Migration {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
-    data['old_base'] = this.oldBase;
-    data['new_base'] = this.newBase;
-    data['sunset'] = this.sunset;
+    final Map<String, dynamic> data = {};
+
+    data['message'] = message;
+    data['old_base'] = oldBase;
+    data['new_base'] = newBase;
+    data['sunset'] = sunset;
+
     return data;
   }
 }
-class Suggestionss {
-  String? status;
-  String? statusMessage;
-  Data? data;
-  Meta? meta;
-
-  Suggestionss({this.status, this.statusMessage, this.data, this.meta});
-
-  Suggestionss.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    statusMessage = json['status_message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
-    meta = json['@meta'] != null ? new Meta.fromJson(json['@meta']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['status_message'] = this.statusMessage;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
-    if (this.meta != null) {
-      data['@meta'] = this.meta!.toJson();
-    }
-    return data;
-  }
-}
-
-class Dataa {
-  int? movieCount;
-  List<Movies>? movies;
-
-  Dataa({this.movieCount, this.movies});
-
-  Dataa.fromJson(Map<String, dynamic> json) {
-    movieCount = json['movie_count'];
-    if (json['movies'] != null) {
-      movies = <Movies>[];
-      json['movies'].forEach((v) {
-        movies!.add(new Movies.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['movie_count'] = this.movieCount;
-    if (this.movies != null) {
-      data['movies'] = this.movies!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
-class Moviess {
-  int? id;
-  String? url;
-  String? imdbCode;
-  String? title;
-  String? titleEnglish;
-  String? titleLong;
-  String? slug;
-  int? year;
-  double? rating;
-  int? runtime;
-  List<String>? genres;
-  String? summary;
-  String? descriptionFull;
-  String? synopsis;
-  String? ytTrailerCode;
-  String? language;
-  String? mpaRating;
-  String? backgroundImage;
-  String? backgroundImageOriginal;
-  String? smallCoverImage;
-  String? mediumCoverImage;
-  String? state;
-  List<Torrents>? torrents;
-  String? dateUploaded;
-  int? dateUploadedUnix;
-
-  Moviess(
-      {this.id,
-        this.url,
-        this.imdbCode,
-        this.title,
-        this.titleEnglish,
-        this.titleLong,
-        this.slug,
-        this.year,
-        this.rating,
-        this.runtime,
-        this.genres,
-        this.summary,
-        this.descriptionFull,
-        this.synopsis,
-        this.ytTrailerCode,
-        this.language,
-        this.mpaRating,
-        this.backgroundImage,
-        this.backgroundImageOriginal,
-        this.smallCoverImage,
-        this.mediumCoverImage,
-        this.state,
-        this.torrents,
-        this.dateUploaded,
-        this.dateUploadedUnix});
-
-  Moviess.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    url = json['url'];
-    imdbCode = json['imdb_code'];
-    title = json['title'];
-    titleEnglish = json['title_english'];
-    titleLong = json['title_long'];
-    slug = json['slug'];
-    year = json['year'];
-    rating = json['rating'];
-    runtime = json['runtime'];
-    genres = json['genres'].cast<String>();
-    summary = json['summary'];
-    descriptionFull = json['description_full'];
-    synopsis = json['synopsis'];
-    ytTrailerCode = json['yt_trailer_code'];
-    language = json['language'];
-    mpaRating = json['mpa_rating'];
-    backgroundImage = json['background_image'];
-    backgroundImageOriginal = json['background_image_original'];
-    smallCoverImage = json['small_cover_image'];
-    mediumCoverImage = json['medium_cover_image'];
-    state = json['state'];
-    if (json['torrents'] != null) {
-      torrents = <Torrents>[];
-      json['torrents'].forEach((v) {
-        torrents!.add(new Torrents.fromJson(v));
-      });
-    }
-    dateUploaded = json['date_uploaded'];
-    dateUploadedUnix = json['date_uploaded_unix'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['url'] = this.url;
-    data['imdb_code'] = this.imdbCode;
-    data['title'] = this.title;
-    data['title_english'] = this.titleEnglish;
-    data['title_long'] = this.titleLong;
-    data['slug'] = this.slug;
-    data['year'] = this.year;
-    data['rating'] = this.rating;
-    data['runtime'] = this.runtime;
-    data['genres'] = this.genres;
-    data['summary'] = this.summary;
-    data['description_full'] = this.descriptionFull;
-    data['synopsis'] = this.synopsis;
-    data['yt_trailer_code'] = this.ytTrailerCode;
-    data['language'] = this.language;
-    data['mpa_rating'] = this.mpaRating;
-    data['background_image'] = this.backgroundImage;
-    data['background_image_original'] = this.backgroundImageOriginal;
-    data['small_cover_image'] = this.smallCoverImage;
-    data['medium_cover_image'] = this.mediumCoverImage;
-    data['state'] = this.state;
-    if (this.torrents != null) {
-      data['torrents'] = this.torrents!.map((v) => v.toJson()).toList();
-    }
-    data['date_uploaded'] = this.dateUploaded;
-    data['date_uploaded_unix'] = this.dateUploadedUnix;
-    return data;
-  }
-}
-
-class Torrentss {
-  String? url;
-  String? hash;
-  String? quality;
-  String? isRepack;
-  String? videoCodec;
-  String? bitDepth;
-  String? audioChannels;
-  int? seeds;
-  int? peers;
-  String? size;
-  int? sizeBytes;
-  String? dateUploaded;
-  int? dateUploadedUnix;
-
-  Torrentss(
-      {this.url,
-        this.hash,
-        this.quality,
-        this.isRepack,
-        this.videoCodec,
-        this.bitDepth,
-        this.audioChannels,
-        this.seeds,
-        this.peers,
-        this.size,
-        this.sizeBytes,
-        this.dateUploaded,
-        this.dateUploadedUnix});
-
-  Torrentss.fromJson(Map<String, dynamic> json) {
-    url = json['url'];
-    hash = json['hash'];
-    quality = json['quality'];
-    isRepack = json['is_repack'];
-    videoCodec = json['video_codec'];
-    bitDepth = json['bit_depth'];
-    audioChannels = json['audio_channels'];
-    seeds = json['seeds'];
-    peers = json['peers'];
-    size = json['size'];
-    sizeBytes = json['size_bytes'];
-    dateUploaded = json['date_uploaded'];
-    dateUploadedUnix = json['date_uploaded_unix'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['url'] = this.url;
-    data['hash'] = this.hash;
-    data['quality'] = this.quality;
-    data['is_repack'] = this.isRepack;
-    data['video_codec'] = this.videoCodec;
-    data['bit_depth'] = this.bitDepth;
-    data['audio_channels'] = this.audioChannels;
-    data['seeds'] = this.seeds;
-    data['peers'] = this.peers;
-    data['size'] = this.size;
-    data['size_bytes'] = this.sizeBytes;
-    data['date_uploaded'] = this.dateUploaded;
-    data['date_uploaded_unix'] = this.dateUploadedUnix;
-    return data;
-  }
-}
-
-class Metas {
-  Migration? migration;
-  int? apiVersion;
-  String? executionTime;
-
-  Metas({this.migration, this.apiVersion, this.executionTime});
-
-  Metas.fromJson(Map<String, dynamic> json) {
-    migration = json['migration'] != null
-        ? new Migration.fromJson(json['migration'])
-        : null;
-    apiVersion = json['api_version'];
-    executionTime = json['execution_time'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.migration != null) {
-      data['migration'] = this.migration!.toJson();
-    }
-    data['api_version'] = this.apiVersion;
-    data['execution_time'] = this.executionTime;
-    return data;
-  }
-}
-
-class Migrations {
-  String? message;
-  String? oldBase;
-  String? newBase;
-  String? sunset;
-
-  Migrations({this.message, this.oldBase, this.newBase, this.sunset});
-
-  Migrations.fromJson(Map<String, dynamic> json) {
-    message = json['message'];
-    oldBase = json['old_base'];
-    newBase = json['new_base'];
-    sunset = json['sunset'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
-    data['old_base'] = this.oldBase;
-    data['new_base'] = this.newBase;
-    data['sunset'] = this.sunset;
-    return data;
-  }
-}
-

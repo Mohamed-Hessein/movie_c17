@@ -7,7 +7,7 @@ import 'package:movie_c17_me/features/profile/domain/usecase/get_user_usecase.da
 import 'package:movie_c17_me/features/profile/domain/usecase/set_user_usecase.dart';
 import 'package:movie_c17_me/features/profile/presentation/bloc/user_event.dart';
 import 'package:movie_c17_me/features/profile/presentation/bloc/user_state.dart';
-@injectable
+@lazySingleton
 class UserBloc extends Bloc<UserEvent, UserState> {
   GetUserUsecase getUserUsecase;
   SetUserUsecase setUserUsecase;
@@ -65,5 +65,15 @@ await    collectionUsecase.call();
       }
 
     });
+    on<logOutEvent>((event, emit){
+      emit(state.copyWith(getMoviesStatus: RequestStatus.loading));
+   try{
+     userDs.logOut();
+     emit(state.copyWith(getMoviesStatus: RequestStatus.success));
+   }catch(e){
+     emit(state.copyWith(getMoviesStatus: RequestStatus.error, errorMassage: e.toString()));
+   }
+    });
   }
+
  }

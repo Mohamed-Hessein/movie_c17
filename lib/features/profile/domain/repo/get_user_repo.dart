@@ -5,5 +5,5 @@ abstract class UserRepo {
   Future<UserModel?> getUser();
   CollectionReference<UserModel> CreateCollectionUSer();
   Future<void> setUser(UserModel user);
-
+  Future<void> logOut();
 }

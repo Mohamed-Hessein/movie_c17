@@ -44,4 +44,9 @@ try{
       print(e);
     }
   }
+
+  @override
+  Future<void> logOut() async{
+return await FirebaseAuth.instance.signOut();
+  }
 }

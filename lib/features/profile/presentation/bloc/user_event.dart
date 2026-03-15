@@ -12,4 +12,5 @@ class upDateUser extends UserEvent{
   upDateUser(
       this.userModel
       );
-}
+
+}  class logOutEvent extends UserEvent{}

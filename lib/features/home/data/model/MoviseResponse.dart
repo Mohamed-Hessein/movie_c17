@@ -1,21 +1,34 @@
+import 'package:hive/hive.dart';
 
-class MoviesResponse {
+
+@HiveType(typeId: 0)
+class MoviesResponse extends HiveObject {
+
+  @HiveField(0)
+  String? status;
+
+  @HiveField(1)
+  String? statusMessage;
+
+  @HiveField(2)
+  Data? data;
+
+  @HiveField(3)
+  Meta? meta;
+
   MoviesResponse({
-      this.status,
-      this.statusMessage,
-      this.data,
-      this.meta,});
+    this.status,
+    this.statusMessage,
+    this.data,
+    this.meta,
+  });
 
   MoviesResponse.fromJson(dynamic json) {
     status = json['status'];
     statusMessage = json['status_message'];
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
-    meta = json['@meta'] != null ?  Meta.fromJson(json['@meta']) : null;
+    meta = json['@meta'] != null ? Meta.fromJson(json['@meta']) : null;
   }
-  String? status;
-  String? statusMessage;
-  Data? data;
-  Meta? meta;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -29,23 +42,33 @@ class MoviesResponse {
     }
     return map;
   }
-
 }
 
+@HiveType(typeId: 1)
 class Meta {
+
+  @HiveField(0)
+  Migration? migration;
+
+  @HiveField(1)
+  int? apiVersion;
+
+  @HiveField(2)
+  String? executionTime;
+
   Meta({
-      this.migration,
-      this.apiVersion,
-      this.executionTime,});
+    this.migration,
+    this.apiVersion,
+    this.executionTime,
+  });
 
   Meta.fromJson(dynamic json) {
-    migration = json['migration'] != null ? Migration.fromJson(json['migration']) : null;
+    migration = json['migration'] != null
+        ? Migration.fromJson(json['migration'])
+        : null;
     apiVersion = json['api_version'];
     executionTime = json['execution_time'];
   }
-  Migration? migration;
-  int? apiVersion;
-  String? executionTime;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -56,15 +79,29 @@ class Meta {
     map['execution_time'] = executionTime;
     return map;
   }
-
 }
 
-class Migration {
+@HiveType(typeId: 2)
+class Migration extends HiveObject {
+
+  @HiveField(0)
+  String? message;
+
+  @HiveField(1)
+  String? oldBase;
+
+  @HiveField(2)
+  String? newBase;
+
+  @HiveField(3)
+  String? sunset;
+
   Migration({
-      this.message,
-      this.oldBase,
-      this.newBase,
-      this.sunset,});
+    this.message,
+    this.oldBase,
+    this.newBase,
+    this.sunset,
+  });
 
   Migration.fromJson(dynamic json) {
     message = json['message'];
@@ -72,10 +109,6 @@ class Migration {
     newBase = json['new_base'];
     sunset = json['sunset'];
   }
-  String? message;
-  String? oldBase;
-  String? newBase;
-  String? sunset;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -85,20 +118,35 @@ class Migration {
     map['sunset'] = sunset;
     return map;
   }
-
 }
 
-class Data {
+@HiveType(typeId: 3)
+class Data  extends HiveObject{
+
+  @HiveField(0)
+  int? movieCount;
+
+  @HiveField(1)
+  int? limit;
+
+  @HiveField(2)
+  int? pageNumber;
+
+  @HiveField(3)
+  List<Movies>? movies;
+
   Data({
-      this.movieCount,
-      this.limit,
-      this.pageNumber,
-      this.movies,});
+    this.movieCount,
+    this.limit,
+    this.pageNumber,
+    this.movies,
+  });
 
   Data.fromJson(dynamic json) {
     movieCount = json['movie_count'];
     limit = json['limit'];
     pageNumber = json['page_number'];
+
     if (json['movies'] != null) {
       movies = [];
       json['movies'].forEach((v) {
@@ -106,10 +154,6 @@ class Data {
       });
     }
   }
-  int? movieCount;
-  int? limit;
-  int? pageNumber;
-  List<Movies>? movies;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -121,37 +165,117 @@ class Data {
     }
     return map;
   }
-
 }
 
-class Movies {
+@HiveType(typeId: 4)
+class Movies extends HiveObject {
+
+  @HiveField(0)
+  int? id;
+
+  @HiveField(1)
+  String? url;
+
+  @HiveField(2)
+  String? imdbCode;
+
+  @HiveField(3)
+  String? title;
+
+  @HiveField(4)
+  String? titleEnglish;
+
+  @HiveField(5)
+  String? titleLong;
+
+  @HiveField(6)
+  String? slug;
+
+  @HiveField(7)
+  int? year;
+
+  @HiveField(8)
+  double? rating;
+
+  @HiveField(9)
+  int? runtime;
+
+  @HiveField(10)
+  List<String>? genres;
+
+  @HiveField(11)
+  String? summary;
+
+  @HiveField(12)
+  String? descriptionFull;
+
+  @HiveField(13)
+  String? synopsis;
+
+  @HiveField(14)
+  String? ytTrailerCode;
+
+  @HiveField(15)
+  String? language;
+
+  @HiveField(16)
+  String? mpaRating;
+
+  @HiveField(17)
+  String? backgroundImage;
+
+  @HiveField(18)
+  String? backgroundImageOriginal;
+
+  @HiveField(19)
+  String? smallCoverImage;
+
+  @HiveField(20)
+  String? mediumCoverImage;
+
+  @HiveField(21)
+  String? largeCoverImage;
+
+  @HiveField(22)
+  String? state;
+
+  @HiveField(23)
+  List<Torrents>? torrents;
+
+  @HiveField(24)
+  String? dateUploaded;
+
+  @HiveField(25)
+  int? dateUploadedUnix;
+
   Movies({
-      this.id,
-      this.url,
-      this.imdbCode,
-      this.title,
-      this.titleEnglish,
-      this.titleLong,
-      this.slug,
-      this.year,
-      this.rating,
-      this.runtime,
-      this.genres,
-      this.summary,
-      this.descriptionFull,
-      this.synopsis,
-      this.ytTrailerCode,
-      this.language,
-      this.mpaRating,
-      this.backgroundImage,
-      this.backgroundImageOriginal,
-      this.smallCoverImage,
-      this.mediumCoverImage,
-      this.largeCoverImage,
-      this.state,
-      this.torrents,
-      this.dateUploaded,
-      this.dateUploadedUnix,});
+    this.id,
+    this.url,
+    this.imdbCode,
+    this.title,
+    this.titleEnglish,
+    this.titleLong,
+    this.slug,
+    this.year,
+    this.rating,
+    this.runtime,
+    this.genres,
+    this.summary,
+    this.descriptionFull,
+    this.synopsis,
+    this.ytTrailerCode,
+    this.language,
+    this.mpaRating,
+    this.backgroundImage,
+    this.backgroundImageOriginal,
+    this.smallCoverImage,
+    this.mediumCoverImage,
+    this.largeCoverImage,
+    this.state,
+    this.torrents,
+    this.dateUploaded,
+    this.dateUploadedUnix,
+  });
 
   Movies.fromJson(dynamic json) {
     id = json['id'];
@@ -177,41 +301,17 @@ class Movies {
     mediumCoverImage = json['medium_cover_image'];
     largeCoverImage = json['large_cover_image'];
     state = json['state'];
+
     if (json['torrents'] != null) {
       torrents = [];
       json['torrents'].forEach((v) {
         torrents?.add(Torrents.fromJson(v));
       });
     }
+
     dateUploaded = json['date_uploaded'];
     dateUploadedUnix = json['date_uploaded_unix'];
   }
-  int? id;
-  String? url;
-  String? imdbCode;
-  String? title;
-  String? titleEnglish;
-  String? titleLong;
-  String? slug;
-  int? year;
-  double? rating;
-  int? runtime;
-  List<String>? genres;
-  String? summary;
-  String? descriptionFull;
-  String? synopsis;
-  String? ytTrailerCode;
-  String? language;
-  String? mpaRating;
-  String? backgroundImage;
-  String? backgroundImageOriginal;
-  String? smallCoverImage;
-  String? mediumCoverImage;
-  String? largeCoverImage;
-  String? state;
-  List<Torrents>? torrents;
-  String? dateUploaded;
-  int? dateUploadedUnix;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -238,32 +338,79 @@ class Movies {
     map['medium_cover_image'] = mediumCoverImage;
     map['large_cover_image'] = largeCoverImage;
     map['state'] = state;
+
     if (torrents != null) {
       map['torrents'] = torrents?.map((v) => v.toJson()).toList();
     }
+
     map['date_uploaded'] = dateUploaded;
     map['date_uploaded_unix'] = dateUploadedUnix;
+
     return map;
   }
-
 }
 
-class Torrents {
+@HiveType(typeId: 5)
+class Torrents extends HiveObject {
+
+  @HiveField(0)
+  String? url;
+
+  @HiveField(1)
+  String? hash;
+
+  @HiveField(2)
+  String? quality;
+
+  @HiveField(3)
+  String? type;
+
+  @HiveField(4)
+  String? isRepack;
+
+  @HiveField(5)
+  String? videoCodec;
+
+  @HiveField(6)
+  String? bitDepth;
+
+  @HiveField(7)
+  String? audioChannels;
+
+  @HiveField(8)
+  int? seeds;
+
+  @HiveField(9)
+  int? peers;
+
+  @HiveField(10)
+  String? size;
+
+  @HiveField(11)
+  int? sizeBytes;
+
+  @HiveField(12)
+  String? dateUploaded;
+
+  @HiveField(13)
+  int? dateUploadedUnix;
+
   Torrents({
-      this.url,
-      this.hash,
-      this.quality,
-      this.type,
-      this.isRepack,
-      this.videoCodec,
-      this.bitDepth,
-      this.audioChannels,
-      this.seeds,
-      this.peers,
-      this.size,
-      this.sizeBytes,
-      this.dateUploaded,
-      this.dateUploadedUnix,});
+    this.url,
+    this.hash,
+    this.quality,
+    this.type,
+    this.isRepack,
+    this.videoCodec,
+    this.bitDepth,
+    this.audioChannels,
+    this.seeds,
+    this.peers,
+    this.size,
+    this.sizeBytes,
+    this.dateUploaded,
+    this.dateUploadedUnix,
+  });
 
   Torrents.fromJson(dynamic json) {
     url = json['url'];
@@ -281,20 +428,6 @@ class Torrents {
     dateUploaded = json['date_uploaded'];
     dateUploadedUnix = json['date_uploaded_unix'];
   }
-  String? url;
-  String? hash;
-  String? quality;
-  String? type;
-  String? isRepack;
-  String? videoCodec;
-  String? bitDepth;
-  String? audioChannels;
-  int? seeds;
-  int? peers;
-  String? size;
-  int? sizeBytes;
-  String? dateUploaded;
-  int? dateUploadedUnix;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -314,5 +447,4 @@ class Torrents {
     map['date_uploaded_unix'] = dateUploadedUnix;
     return map;
   }
-
 }
