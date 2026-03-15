@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import '../../features/auth/presentation/screen/forget_password_screen.dart';
+import '../../features/auth/presentation/screen/login_screen.dart';
+import '../../features/auth/presentation/screen/register_screen.dart';
 import '../../features/edit_profile/presetation/screen/edit_profile_screen.dart';
 import '../../features/home/data/model/MoviseResponse.dart' show Movies;
 import '../../features/home/presentation/screen/check_user_screen.dart';
 import '../../features/profile/data/data_sourc/model/user_model.dart';
-import '../../onboarding/presentation/auth/forget_password_screen.dart';
-import '../../onboarding/presentation/auth/login_screen.dart';
-import '../../onboarding/presentation/auth/register_screen.dart';
 import '../../features/details/presentation/screen/movie_details_screen.dart';
 import '../../features/home/presentation/screen/home_screen.dart';
 import '../../onboarding/presentation/screens/on_boarding_screen.dart';

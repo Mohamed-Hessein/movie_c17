@@ -20,39 +20,42 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<HomeBloc>()..add(GetMovies()),
-      child: Scaffold(
-        extendBody: true,
-        backgroundColor: ColorsApp.background,
-        body: BlocBuilder<HomeBloc, HomeState>(
-            builder: (context, state) {
-              return Stack(
-                children: [
-                  IndexedStack(
-                    index: state.currentIndex,
-                    children: [
-                      HomeTab(),
-                      SearchTab(),
-                      ExploreTab(),
-                      ProfileTab(),
-                    ],
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    child: BottomNavBar(),
-                  ),
-                ],
-              );
-            }
-        ) ,
-        // bottomNavigationBar: Container(
-        //     height: 100,
-        //   decoration: BoxDecoration(
-        //      color: ColorsApp.surface,
-        //
-        //   ),
-        //     child: BottomNavBar()),
+      child: Directionality(
+        textDirection: TextDirection.ltr,
+        child: Scaffold(
+          extendBody: true,
+          backgroundColor: ColorsApp.background,
+          body: BlocBuilder<HomeBloc, HomeState>(
+              builder: (context, state) {
+                return Stack(
+                  children: [
+                    IndexedStack(
+                      index: state.currentIndex,
+                      children: [
+                        HomeTab(),
+                        SearchTab(),
+                        ExploreTab(),
+                        ProfileTab(),
+                      ],
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: BottomNavBar(),
+                    ),
+                  ],
+                );
+              }
+          ) ,
+          // bottomNavigationBar: Container(
+          //     height: 100,
+          //   decoration: BoxDecoration(
+          //      color: ColorsApp.surface,
+          //
+          //   ),
+          //     child: BottomNavBar()),
+        ),
       ),
     );
   }

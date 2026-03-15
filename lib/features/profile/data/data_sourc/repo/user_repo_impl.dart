@@ -36,4 +36,10 @@ try{
    rethrow;
  }
   }
+
+  @override
+  Future<void> logOut() {
+    // TODO: implement logOut
+    throw UnimplementedError();
+  }
 }

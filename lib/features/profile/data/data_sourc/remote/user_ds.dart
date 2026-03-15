@@ -6,5 +6,5 @@ abstract class UserDs {
   Future<UserModel?> getUser();
   CollectionReference<UserModel> CreateCollectionUSer();
 setUser(UserModel user);
-
+  Future<void> logOut();
 }

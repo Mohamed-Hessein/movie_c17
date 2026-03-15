@@ -15,6 +15,7 @@ import 'package:movie_c17_me/features/profile/data/data_sourc/model/user_model.d
 import 'package:movie_c17_me/features/profile/presentation/bloc/user_bloc.dart';
 import 'package:movie_c17_me/features/profile/presentation/bloc/user_event.dart';
 
+import '../../../../core/resources/auto_route.dart';
 import '../bloc/update_user_state.dart';
 
 
@@ -33,111 +34,128 @@ final UserModel user;
 
     return MultiBlocProvider(
       providers: [
+
         BlocProvider(create: (_)=>getIt<UpdateUserBloc>())
       ],
 
         child: Builder(
           builder: (context) {
-            return Scaffold(
-              backgroundColor: ColorsApp.background,
-              body:  BlocListener<UpdateUserBloc, UpdateUserState>(
-                listener: (BuildContext context,  state) {
-                  if (state.getUserStatus == RequestStatus.success) {
-                    context.read<UserBloc>().add(getUser());
-                    context.pop();
-                  }
-                },
-                child: SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+            return Directionality(
+              textDirection: TextDirection.ltr,
+              child: Scaffold(
+                extendBody: true,
+                backgroundColor: ColorsApp.background,
+                body:  BlocListener<UpdateUserBloc, UpdateUserState>(
+                  listener: (BuildContext context,  state) {
+                    if (state.getUserStatus == RequestStatus.success) {
+                      context.read<UserBloc>().add(getUser());
+                      Navigator.of(context).pop();
+                    }
+                    final userBloc = context.read<UserBloc>();
+                    if (!userBloc.isClosed) {
+                      userBloc.add(getUser());
+                    }
 
-                        const SizedBox(height: 10),
+                  },
+                  child: SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: SingleChildScrollView(
+                        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
 
-                      GestureDetector(
-                        onTap: (){
-                          Navigator.pop(context);
-                        },
-                          child: const Icon(
-                            Icons.arrow_back,
-                            color: Colors.yellow,
-                          ),
-                        ),
+                            const SizedBox(height: 10),
 
-                        const SizedBox(height: 10),
-
-                        const Center(
-                          child: Text(
-                            "Pick Avatar",
-                            style: TextStyle(
-                              color: Colors.yellow,
-                              fontSize: 16,
+                          GestureDetector(
+                            onTap: (){
+                              Navigator.pop(context);
+                            },
+                              child: const Icon(
+                                Icons.arrow_back,
+                                color: Colors.yellow,
+                              ),
                             ),
-                          ),
+
+                            const SizedBox(height: 10),
+
+                            const Center(
+                              child: Text(
+                                "Pick Avatar",
+                                style: TextStyle(
+                                  color: Colors.yellow,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(height: 20),
+
+                            AvatarPicker(
+                              image: user.avatar??'',
+                            ),
+
+                            const SizedBox(height: 30),
+
+                            ProfileTextField(
+                              controller: nameC,
+                              icon: Icons.person,
+                              hint: user.name,
+                            ),
+
+                            const SizedBox(height: 15),
+
+                            ProfileTextField(
+                              controller: phoneC,
+                              icon: Icons.phone,
+                              hint: user?.phone??'',
+                            ),
+
+                            const SizedBox(height: 10),
+
+                            const Text(
+                              "Reset Password",
+                              style: TextStyle(
+                                color: Colors.white70,
+                              ),
+                            ),
+
+
+                            const SizedBox(height: 50),
+                            PrimaryButton(
+                              text: "Delete Account",
+                              color: Colors.red,
+                              onTap: () {
+                                context.read<UserBloc>().add((logOutEvent()));
+                                context.pushRoute(LoginRoute());
+                              },
+                            ),
+
+                            const SizedBox(height: 10),
+
+                            PrimaryButton(
+                              text: "Update Data",
+                              color: ColorsApp.primaryGold,
+                              onTap: () {
+
+                                var users = UserModel(
+                                  id: user.id ?? FirebaseAuth.instance.currentUser!.uid,
+                                  email: user.email,
+                                  name: nameC.text.trim(),
+                                  avatar: context.read<UpdateUserBloc>().state.avtar?[context.read<UpdateUserBloc>().state.selectedAvatar] ?? ImageApp.byProfile,
+                                  phone: phoneC.text.trim(),
+                                );
+
+                                context.read<UpdateUserBloc>().add(UpdateUser(users));
+                              },
+                            ),
+
+                            const SizedBox(height: 20),
+                          ],
                         ),
-
-                        const SizedBox(height: 20),
-
-                        AvatarPicker(
-                          image: user.avatar??'',
-                        ),
-
-                        const SizedBox(height: 30),
-
-                        ProfileTextField(
-                          controller: nameC,
-                          icon: Icons.person,
-                          hint: user.name,
-                        ),
-
-                        const SizedBox(height: 15),
-
-                        ProfileTextField(
-                          controller: phoneC,
-                          icon: Icons.phone,
-                          hint: user?.phone??'',
-                        ),
-
-                        const SizedBox(height: 10),
-
-                        const Text(
-                          "Reset Password",
-                          style: TextStyle(
-                            color: Colors.white70,
-                          ),
-                        ),
-
-                        const Spacer(),
-
-                        PrimaryButton(
-                          text: "Delete Account",
-                          color: Colors.red,
-                          onTap: () {},
-                        ),
-
-                        const SizedBox(height: 10),
-
-                        PrimaryButton(
-                          text: "Update Data",
-                          color: ColorsApp.primaryGold,
-                          onTap: () {
-
-                            var users = UserModel(
-                              id: user.id ?? FirebaseAuth.instance.currentUser!.uid,
-                              email: user.email,
-                              name: nameC.text.trim(),
-                              avatar: context.read<UpdateUserBloc>().state.avtar?[context.read<UpdateUserBloc>().state.selectedAvatar],
-                              phone: phoneC.text.trim(),
-                            );
-
-                            context.read<UpdateUserBloc>().add(UpdateUser(users));
-                          },
-                        ),
-
-                        const SizedBox(height: 20),
-                      ],
+                      ),
                     ),
                   ),
                 ),

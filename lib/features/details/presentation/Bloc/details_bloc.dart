@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_c17_me/di.dart';
+import 'package:movie_c17_me/features/details/domain/usecase/datails_local_usecase.dart';
+import 'package:movie_c17_me/features/details/domain/usecase/suggestion_local_usecase.dart';
 import 'package:movie_c17_me/features/details/presentation/Bloc/details_events.dart';
 import 'package:movie_c17_me/features/details/presentation/Bloc/details_state.dart';
 import 'package:movie_c17_me/features/home/presentation/bloc/home_event.dart';
@@ -21,10 +23,12 @@ import '../../domain/usecase/suggestion_usercase.dart';
 @injectable
 class DetailsBloc  extends Bloc<DetailsEvents, DetailsState>{
   UpdateFavUseCase updateFavUseCase;
+DatailsLocalUsecase datailsLocalUsecase;
+SuggestionLocalUsecase suggestionLocalUsecase;
   DetailsUseCase detailsUseCase;
   FavUsecase favUsecase;
   SuggestionUsercase suggestionUsercase;  SetFavUsecase setFavUsecase;
-  DetailsBloc(this.favUsecase,this.updateFavUseCase, this.detailsUseCase, this.suggestionUsercase, this.setFavUsecase) : super(DetailsState()){
+  DetailsBloc(this.datailsLocalUsecase, this.suggestionLocalUsecase,this.favUsecase,this.updateFavUseCase, this.detailsUseCase, this.suggestionUsercase, this.setFavUsecase) : super(DetailsState()){
     subscribeToFavs();
 on<getDetails>((event, emit)async{
   emit(state.copyWith(getDetailsStatus: RequestStatus.loading));
@@ -37,9 +41,10 @@ getIt<HistoryBloc>().add(HistorySave(event.id));
         getDetailsStatus: RequestStatus.success,
         detailsOfMovies: res
     ));
-
-  }catch(e){
-    emit(state.copyWith(getDetailsStatus: RequestStatus.error,errorMassage: e.toString()));
+await datailsLocalUsecase.saveDetails(state.detailsOfMovies!);
+  }catch(_){
+    var resLocal = await datailsLocalUsecase.call(event.id);
+    emit(state.copyWith(getDetailsStatus: RequestStatus.success,detailsOfMovies: resLocal));
 
   }
   });
@@ -52,9 +57,10 @@ getIt<HistoryBloc>().add(HistorySave(event.id));
         getDetailsStatus: RequestStatus.success,
         suggestions: res
     ));
-
-  }catch(e){
-    emit(state.copyWith(getDetailsStatus: RequestStatus.error,errorMassage: e.toString()));
+    await suggestionLocalUsecase.saveDetails(state.suggestions!);
+  }catch(_){
+    var resLocal = await suggestionLocalUsecase.call(event.id);
+    emit(state.copyWith(getDetailsStatus: RequestStatus.success,suggestions: resLocal));
 
   }
   });
