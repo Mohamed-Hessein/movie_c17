@@ -1,47 +1,61 @@
 # 🎬 Movie C17 App
 
-A premium Movie Exploration & Booking application built with **Flutter**. This project demonstrates a high-level implementation of **Clean Architecture**, **State Management (Bloc)**, and a fully immersive **6-step Onboarding flow**.
+A premium Movie Exploration & Booking application built with **Flutter**. This project demonstrates an expert-level implementation of **Clean Architecture**, **State Management (Bloc)**, and a complex **6-step Onboarding flow** with a comprehensive **User Account System**.
 
 ---
 
 ## 📸 Screenshots
 
-### 🌟 Immersive Onboarding Flow (6 Steps)
-The app features a guided experience to help users discover, create, and rate content.
+Here is a visual overview of the application modules and the full user experience flow.
 
-| Step 1: Favorites & Step 2: Discover | Step 3: Explore & Step 4: Create | Step 5: Rate & Step 6: Finish |
+### 🌟 Immersive Onboarding (6 Steps)
+A guided experience to discover, create, and rate content using `PageView` logic.
+
+| Step 1: Favorite & Step 2: Discover | Step 3: Explore & Step 4: Create | Step 5: Rate & Step 6: Finish |
 | :---: | :---: | :---: |
 | <img src="screenshots/onboarding_1.png" width="180"> <img src="screenshots/onboarding_2.png" width="180"> | <img src="screenshots/onboarding_3.png" width="180"> <img src="screenshots/onboarding_4.png" width="180"> | <img src="screenshots/onboarding_5.png" width="180"> <img src="screenshots/onboarding_6.png" width="180"> |
 
-### 🔐 Authentication & Profile
-| Login Screen | Register Screen | Profile & Edit |
-| :---: | :---: | :---: |
-| <img src="screenshots/login.png" width="200"> | <img src="screenshots/register.png" width="200"> | <img src="screenshots/profile.png" width="200"> |
-
-### 🍿 Main App Features
-| Home Screen | Browser | Search |
+### 🍿 Home & Discovery Flow
+| Home Screen | Browser | Search Screen |
 | :---: | :---: | :---: |
 | <img src="screenshots/home.png" width="200"> | <img src="screenshots/browser.png" width="200"> | <img src="screenshots/search.png" width="200"> |
 
-> **Note:** Ensure all images are placed in the `/screenshots` folder at the root of the project.
+### 🔎 Movie Details (2 Views)
+In-depth content information managed via the dedicated `details` module.
+
+| Cast & Story | Technical & Recommended |
+| :---: | :---: |
+| <img src="screenshots/details1.png" width="250"> | <img src="screenshots/details2.png" width="250"> |
+
+### 👤 Profile & Edit Flow (2 Views)
+Complete user profile management with Firebase real-time sync.
+
+| Profile Summary | Edit Information Form |
+| :---: | :---: |
+| <img src="screenshots/profile1.png" width="250"> | <img src="screenshots/profile2.png" width="250"> |
+
+> **Note:** Place all images in the `/screenshots` folder at the root of the project. Ensure exact filename matching.
 
 ---
 
-## ✨ Key Features
+## ✨ Key Features (Clean Architecture)
 
-### 🚀 Advanced Onboarding
-* **Sequential Flow:** 6 distinct pages (`Favorite`, `Discover`, `Explore`, `Create`, `Rate`, `Finish`) using `PageView` and `PageController`.
-* **Smart UI Logic:** Context-aware navigation buttons (Back button appears only after step 2).
+### 🚀 Onboarding
+* **Dynamic sequentially Pages:** Uses `PageView` and `PageController` for a smooth onboarding.
+* **Smart Navigation:** Dynamic Back button visibility after step 2 and Finish button conversion.
 
-### 🏗 Architecture & Performance
-* **Clean Architecture:** Organized by features (`auth`, `home`, `browser`, `profile`, `details`) for scalability.
-* **State Management:** Powered by **Flutter Bloc (9.1+)** for predictable state transitions.
-* **Type-Safe Routing:** Advanced navigation using **Auto Route (11.1+)**.
+### 👤 Profile & Personalization
+* **Real-time Synchronization:** Fetches user data directly from **Firebase Auth** & **Firestore**.
+* **Edit Profile:** Dedicated form module for updating personal details and preferences.
+
+### 🏗 Architecture & State
+* **Bloc (9.1+):** Strict state management based on events.
+* **Clean Design:** Feature-based folder structure for maximum maintainability.
+* **Routing:** Strongly typed navigation with **Auto Route (11.1+)**.
 
 ### 🌐 Data & Persistence
-* **Firebase Integration:** Secure Auth and Cloud Firestore for user data.
-* **Offline Support:** High-performance local caching using **Hive** and **Shared Preferences**.
-* **Networking:** Robust API handling with **Dio** and debugging via **Pretty Dio Logger**.
+* **Hive & SharedPreferences:** High-performance local caching.
+* **Networking:** Powerful API handling with **Dio** and debugging via **Pretty Dio Logger**.
 
 ---
 
@@ -49,7 +63,6 @@ The app features a guided experience to help users discover, create, and rate co
 
 * **UI Framework:** Flutter (SDK >= 3.9.0)
 * **Design:** `flutter_screenutil`, `google_fonts`, `carousel_slider`, `cached_network_image`.
-* **State:** `flutter_bloc`, `bloc`.
 * **Dependency Injection:** `get_it`, `injectable`.
 * **Tools:** `auto_route`, `easy_localization`, `connectivity_plus`.
 
