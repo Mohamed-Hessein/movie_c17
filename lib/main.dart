@@ -28,7 +28,6 @@ void main() async {
   getIt<InternetConnectivity>().initialize();
 
 
-// تسجيل كل adapters
   Hive.registerAdapter(MoviesResponseAdapter());
   Hive.registerAdapter(MetaAdapter());
   Hive.registerAdapter(MigrationAdapter());
@@ -44,7 +43,9 @@ void main() async {
         fallbackLocale: Locale('en'),
         child: BlocProvider(
           create: (context) => getIt<UserBloc>(),
-          child: MyApp(),
+          child: Directionality(
+            textDirection: ui.TextDirection.ltr,
+              child: MyApp()),
         ),
       ),
     ),
