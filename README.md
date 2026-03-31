@@ -13,28 +13,28 @@ A guided experience to discover, create, and rate content using `PageView` logic
 
 | Step 1: Favorite & Step 2: Discover | Step 3: Explore & Step 4: Create | Step 5: Rate & Step 6: Finish |
 | :---: | :---: | :---: |
-| <img src="screenshots/onboarding_1.png" width="180"> <img src="screenshots/onboarding_2.png" width="180"> | <img src="screenshots/onboarding_3.png" width="180"> <img src="screenshots/onboarding_4.png" width="180"> | <img src="screenshots/onboarding_5.png" width="180"> <img src="screenshots/onboarding_6.png" width="180"> |
+| <img src="screenshot/onboarding_1.png" width="180"> <img src="screenshot/onboarding_2.png" width="180"> | <img src="screenshot/onboarding_3.png" width="180"> <img src="screenshot/onboarding_4.png" width="180"> | <img src="screenshot/onboarding_5.png" width="180"> <img src="screenshot/onboarding_6.png" width="180"> |
 
 ### 🍿 Home & Discovery Flow
 | Home Screen | Browser | Search Screen |
 | :---: | :---: | :---: |
-| <img src="screenshots/home.png" width="200"> | <img src="screenshots/browser.png" width="200"> | <img src="screenshots/search.png" width="200"> |
+| <img src="screenshot/home.png" width="200"> | <img src="screenshot/browser.png" width="200"> | <img src="screenshot/search.png" width="200"> |
 
 ### 🔎 Movie Details (2 Views)
 In-depth content information managed via the dedicated `details` module.
 
 | Cast & Story | Technical & Recommended |
 | :---: | :---: |
-| <img src="screenshots/details1.png" width="250"> | <img src="screenshots/details2.png" width="250"> |
+| <img src="screenshot/details1.png" width="250"> | <img src="screenshot/details2.png" width="250"> |
 
 ### 👤 Profile & Edit Flow (2 Views)
 Complete user profile management with Firebase real-time sync.
 
 | Profile Summary | Edit Information Form |
 | :---: | :---: |
-| <img src="screenshots/profile1.png" width="250"> | <img src="screenshots/profile2.png" width="250"> |
+| <img src="screenshot/profile1.png" width="250"> | <img src="screenshot/profile2.png" width="250"> |
 
-> **Note:** Place all images in the `/screenshots` folder at the root of the project. Ensure exact filename matching.
+> **Note:** Place all images in the `/screenshot` folder at the root of the project. Ensure exact filename matching.
 
 ---
 
