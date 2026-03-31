@@ -1,5 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/resources/colors_app.dart';
 import '../../../../core/resources/image&icon.dart';
@@ -20,7 +21,7 @@ dynamic name;
 
 
         return     Container(
-          padding: EdgeInsets.symmetric(horizontal: 8,vertical: 16),
+          padding: EdgeInsets.symmetric(horizontal: 5,vertical: 10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
               color: ColorsApp.sceondry),
@@ -29,7 +30,7 @@ dynamic name;
 
               child: Image.network(image,width: 90,height: 90,),
               borderRadius: BorderRadius.circular(16),),
-            Column(children: [Text('$name',style: StyleApp.mdText,),
+            Column(children: [Text('$name',style: StyleApp.mdText.copyWith(fontSize: 15.r),softWrap: true ,overflow: TextOverflow.ellipsis,),
              ],)
           ],),);
       }, separatorBuilder: (BuildContext context, int index) {return SizedBox(height: 15,);  }, itemCount: 3,
